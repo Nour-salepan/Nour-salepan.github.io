@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Nour Salepan</title>
+<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <a href="index.html" class="logo"><span class="prompt">&gt;</span> nour.salepan</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">menu</button>
+    <nav>
+      <ul id="navList">
+        <li><a href="index.html">home</a></li>
+        <li><a href="projects.html">projects</a></li>
+        <li><a href="skills.html">skills</a></li>
+        <li><a href="experience.html">experience</a></li>
+        <li><a href="blog.html" class="active">blog</a></li>
+        <li><a href="contact.html">contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span class="knob">◐</span></button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" style="padding-bottom: 20px;">
+    <div class="container">
+      <div class="eyebrow">writing</div>
+      <h1>Blog</h1>
+      <p class="lead">Notes on data analysis, SQL/Excel techniques, and lessons from each project.</p>
+    </div>
+  </section>
+
+  <section style="border-bottom: none;">
+    <div class="container">
+
+      <a href="post-complete-guide.html" class="card" style="display: block; margin-bottom: 34px;">
+        <div class="card-header">
+          <h3>From Clay Tablets to AI: The Complete Field Guide to Data Analysis</h3>
+          <span class="status">featured</span>
+        </div>
+        <p>
+          What data analysis actually is, how it got here, the vocabulary you need, the skill
+          ladder from zero to mastery, and an honest look at what changes now that a machine
+          can write your SQL. A complete field guide for beginners and self-taught analysts.
+        </p>
+        <div class="tag-list">
+          <span class="tag-chip">Fundamentals</span>
+          <span class="tag-chip">History</span>
+          <span class="tag-chip">Career</span>
+          <span class="tag-chip">AI</span>
+        </div>
+        <div class="blog-date">August 2026 · ~25 min read</div>
+      </a>
+
+      <div class="case-section-title">Coming next</div>
+      <div>
+        <div class="blog-item">
+          <div class="blog-date">coming soon</div>
+          <h3>Catching a 73% ROAS inflation: anatomy of a data-quality defect</h3>
+          <p style="font-size: 0.92rem;">How a single mis-scaled channel skewed blended ROAS from 3.7x to 6.4x, and how to catch it before it reaches a dashboard.</p>
+        </div>
+        <div class="blog-item">
+          <div class="blog-date">coming soon</div>
+          <h3>Window functions, explained through car prices</h3>
+          <p style="font-size: 0.92rem;">A breakdown of RANK() and PARTITION BY using the Car Price Analysis project.</p>
+        </div>
+        <div class="blog-item">
+          <div class="blog-date">coming soon</div>
+          <h3>Cleaning 798 rows of messy marketing data in Excel</h3>
+          <p style="font-size: 0.92rem;">Text, currency, and date cleanup techniques — plus the INDEX/MATCH benchmark table that powered the analysis.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-wrap">
+    <span>© 2026 Nour Salepan</span>
+    <span><a href="https://github.com/Nour-salepan" target="_blank" rel="noopener">github.com/Nour-salepan</a></span>
+  </div>
+</footer>
+
+<script src="theme.js"></script>
+</body>
+</html>

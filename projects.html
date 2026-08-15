@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Nour Salepan</title>
+<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <a href="index.html" class="logo"><span class="prompt">&gt;</span> nour.salepan</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">menu</button>
+    <nav>
+      <ul id="navList">
+        <li><a href="index.html">home</a></li>
+        <li><a href="projects.html" class="active">projects</a></li>
+        <li><a href="skills.html">skills</a></li>
+        <li><a href="experience.html">experience</a></li>
+        <li><a href="blog.html">blog</a></li>
+        <li><a href="contact.html">contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span class="knob">◐</span></button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" style="padding-bottom: 20px;">
+    <div class="container">
+      <div class="eyebrow">portfolio</div>
+      <h1>Projects</h1>
+      <p class="lead">Real datasets, real defects caught, real write-ups — no tutorial follow-alongs.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+
+      <!-- ===== Marketing Campaign Performance ===== -->
+      <div class="case-study" id="marketing">
+        <div class="case-header">
+          <div>
+            <h3>Marketing Campaign Performance Analysis</h3>
+            <div class="case-meta">Excel · 2026 · Self-directed portfolio project · Jan–Jun 2026 dataset</div>
+          </div>
+          <span class="status">complete</span>
+        </div>
+
+        <p>
+          Cleaned and audited a deliberately messy 798-record, 6-channel ad performance
+          dataset end to end, then caught a data-quality defect that was materially
+          distorting the headline numbers.
+        </p>
+
+        <div class="metrics-grid">
+          <div class="metric-box">
+            <span class="metric-num">798 → 780</span>
+            <span class="metric-label">rows after dedup</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-num">103</span>
+            <span class="metric-label">blank cells treated</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-num">89.7x</span>
+            <span class="metric-label">anomalous ROAS flagged</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-num">33%</span>
+            <span class="metric-label">campaigns below target</span>
+          </div>
+        </div>
+
+        <div class="case-section-title">Data Cleaning</div>
+        <ul class="finding-list">
+          <li>Removed <strong>18 duplicate CampaignIDs</strong>; any analysis on the raw file would have double-counted them.</li>
+          <li>Consolidated <strong>30 spelling/casing variants</strong> of Channel into 6 real channels, and <strong>21 Manager variants</strong> into 5 — "TikTok" alone appeared under four different spellings.</li>
+          <li>Treated <strong>103 blank cells</strong> across 5 columns via channel-average imputation or explicit "Unknown" labelling, documenting the choice per column.</li>
+          <li>Normalized a <code>Date</code> column mixing four formats, and converted <code>Spend</code> values stored as text ("$185.70") into numeric fields.</li>
+        </ul>
+
+        <div class="callout">
+          <strong>Key finding —</strong> Email showed $2.81M revenue on just $31.4K spend: an
+          89.7x ROAS versus 2.5–4.7x everywhere else, and 45% of all revenue from only 3% of
+          spend. Flagged as a units error in the source data rather than a genuine result.
+          Excluding it corrected blended ROAS from <strong>6.4x down to 3.7x</strong> on $938.8K
+          of real spend.
+        </div>
+
+        <div class="case-section-title">Budget Efficiency</div>
+        <ul class="finding-list">
+          <li>Google Ads absorbs <strong>$345.5K — 36% of total spend</strong>, more than any other channel, but returns only 3.64x against a 4.0x target, with 53 campaigns Below Target.</li>
+          <li>LinkedIn is less efficient (2.46x vs. a 2.5x target, 62 campaigns Below Target) but carries far less budget ($201.8K) — making Google Ads the highest-dollar rebalancing opportunity.</li>
+          <li><strong>257 of 780 campaigns (33%)</strong> miss their channel benchmark, concentrated in LinkedIn, TikTok, and Google Ads. Facebook is the healthiest paid channel at 4.67x against a 3.5x target.</li>
+          <li>Revenue peaked in <strong>May 2026 at $1.35M</strong>, 56% above the January low; conversion rates barely move across audience segments (5.2–5.6%), so channel and timing — not targeting — drive the variance.</li>
+        </ul>
+
+        <div class="case-section-title">Methodology</div>
+        <p style="font-size: 0.92rem;">
+          Built entirely in Excel: PivotTables and PivotCharts, an INDEX/MATCH benchmark
+          lookup table, IFS-based performance classification (Above/On/Below Target), and
+          independent SUMIFS/COUNTIFS/AVERAGEIFS cross-checks to validate every figure two
+          ways before it went into the write-up.
+        </p>
+
+        <div class="tag-list" style="margin-top: 18px;">
+          <span class="tag-chip">Excel</span>
+          <span class="tag-chip">PivotTables</span>
+          <span class="tag-chip">INDEX/MATCH</span>
+          <span class="tag-chip">IFS Logic</span>
+          <span class="tag-chip">SUMIFS/COUNTIFS/AVERAGEIFS</span>
+          <span class="tag-chip">Data Auditing</span>
+        </div>
+
+        <div class="card-links">
+          <a href="https://github.com/Nour-salepan/data-analyst-portfolio" target="_blank" rel="noopener">Repo ↗</a>
+          <a href="https://github.com/Nour-salepan/data-analyst-portfolio/tree/main/2026-08-06_marketing-campaigns" target="_blank" rel="noopener">Project Folder ↗</a>
+          <a href="https://raw.githubusercontent.com/Nour-salepan/data-analyst-portfolio/main/2026-08-06_marketing-campaigns/insights.md" target="_blank" rel="noopener">Insights Write-up ↗</a>
+        </div>
+      </div>
+
+      <!-- ===== Car Price Analysis ===== -->
+      <div class="case-study" id="car-price">
+        <div class="case-header">
+          <div>
+            <h3>Car Price Analysis</h3>
+            <div class="case-meta">SQL · PostgreSQL · 2026 · Self-directed portfolio project</div>
+          </div>
+          <span class="status">complete</span>
+        </div>
+
+        <p>
+          First SQL project: designed the schema and wrote 13 progressively advanced queries
+          against a 10-field public vehicle-listings dataset, completing the full set within
+          a self-imposed one-hour challenge.
+        </p>
+
+        <div class="metrics-grid">
+          <div class="metric-box">
+            <span class="metric-num">13</span>
+            <span class="metric-label">SQL queries</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-num">10</span>
+            <span class="metric-label">dataset fields</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-num">1 hr</span>
+            <span class="metric-label">self-imposed challenge</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-num">4</span>
+            <span class="metric-label">price drivers isolated</span>
+          </div>
+        </div>
+
+        <div class="case-section-title">Methodology</div>
+        <ul class="finding-list">
+          <li>Ran explicit <strong>null-count and duplicate-detection checks</strong> across all key fields before writing any analysis query.</li>
+          <li>Applied <strong>CTEs, window functions</strong> (<code>RANK() OVER</code>, <code>PARTITION BY</code>), and correlated subqueries to move from basic aggregation to brand-level price statistics.</li>
+          <li>Used <strong>CASE-based banding</strong> to segment pricing by engine-size range (0–2.0L, 2.0–3.0L, 3.0–4.0L, 4.0L+).</li>
+        </ul>
+
+        <div class="case-section-title">Findings</div>
+        <p style="font-size: 0.92rem;">
+          Isolated <strong>brand tier, mileage, model year, and engine size</strong> as the
+          primary price drivers — luxury brands command the highest average prices, mileage
+          strongly affects used-vehicle pricing, and newer model years consistently price
+          higher. Full methodology documented in the public README.
+        </p>
+
+        <div class="tag-list" style="margin-top: 18px;">
+          <span class="tag-chip">PostgreSQL</span>
+          <span class="tag-chip">pgAdmin</span>
+          <span class="tag-chip">CTEs</span>
+          <span class="tag-chip">Window Functions</span>
+          <span class="tag-chip">Data Cleaning</span>
+        </div>
+
+        <div class="card-links">
+          <a href="https://github.com/Nour-salepan/Car-Price-Analysis" target="_blank" rel="noopener">Repo ↗</a>
+          <a href="https://github.com/Nour-salepan/Car-Price-Analysis/blob/main/readme.md" target="_blank" rel="noopener">README ↗</a>
+          <a href="https://github.com/Nour-salepan/Car-Price-Analysis/blob/main/queries.sql" target="_blank" rel="noopener">Queries ↗</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>More projects in progress</h3>
+          <span class="status ongoing">ongoing</span>
+        </div>
+        <p>
+          The Excel/SQL practice series adds a new project periodically, rotating across
+          business domains — retail, HR, finance, supply chain — with difficulty increasing
+          over time. Check GitHub for the latest.
+        </p>
+        <div class="card-links">
+          <a href="https://github.com/Nour-salepan?tab=repositories" target="_blank" rel="noopener">All Repos ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-wrap">
+    <span>© 2026 Nour Salepan</span>
+    <span><a href="https://github.com/Nour-salepan" target="_blank" rel="noopener">github.com/Nour-salepan</a></span>
+  </div>
+</footer>
+
+<script src="theme.js"></script>
+</body>
+</html>

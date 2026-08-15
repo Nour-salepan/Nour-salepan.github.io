@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Clay Tablets to AI: The Complete Field Guide to Data Analysis — Nour Salepan</title>
+<meta name="description" content="What data analysis actually is, how it got here, the skills that matter from zero to mastery, and what changes now that AI can write your SQL.">
+<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="article.css">
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header>
+  <div class="nav-wrap">
+    <a href="index.html" class="logo"><span class="prompt">&gt;</span> nour.salepan</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">menu</button>
+    <nav>
+      <ul id="navList">
+        <li><a href="index.html">home</a></li>
+        <li><a href="projects.html">projects</a></li>
+        <li><a href="skills.html">skills</a></li>
+        <li><a href="experience.html">experience</a></li>
+        <li><a href="blog.html" class="active">blog</a></li>
+        <li><a href="contact.html">contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span class="knob">◐</span></button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <article class="article-wrap">
+
+    <div class="post-head">
+      <div class="eyebrow">field guide</div>
+      <h1>From Clay Tablets to AI: The Complete Field Guide to Data Analysis</h1>
+      <p class="post-sub">
+        What data analysis actually is, how it got here, the vocabulary you need, the skill
+        ladder from zero to mastery, and an honest look at what changes now that a machine
+        can write your SQL.
+      </p>
+      <div class="post-meta">
+        <span>By Nour Salepan</span>
+        <span class="sep">·</span>
+        <span>August 2026</span>
+        <span class="sep">·</span>
+        <span>~25 min read</span>
+      </div>
+    </div>
+
+    <nav class="toc">
+      <div class="toc-title">Contents</div>
+      <ol>
+        <li><a href="#history">Five thousand years of counting things</a></li>
+        <li><a href="#definitions">The vocabulary, defined properly</a></li>
+        <li><a href="#roles">Analyst, scientist, engineer: who does what</a></li>
+        <li><a href="#lifecycle">The lifecycle: how a real analysis actually runs</a></li>
+        <li><a href="#ladder">Zero to mastery: the four levels</a></li>
+        <li><a href="#craft">The part nobody teaches you</a></li>
+        <li><a href="#ai">AI vs. the data analyst: an honest assessment</a></li>
+        <li><a href="#roadmap">A twelve-month roadmap</a></li>
+        <li><a href="#close">What it comes down to</a></li>
+      </ol>
+    </nav>
+
+    <div class="prose">
+
+      <p class="lede">
+        Every job posting wants someone "data-driven." Almost none of them explain what that
+        means on a Tuesday afternoon, in front of a spreadsheet, when the numbers don't add up.
+      </p>
+
+      <p>
+        This is the guide I wanted when I started. Not a tool tutorial — those are everywhere,
+        and they go stale. This is the thing underneath the tools: where this discipline came
+        from, what the words actually mean, which skills compound and which ones don't, and
+        what an analyst is still for in a world where a machine can write a working SQL query
+        in four seconds.
+      </p>
+
+      <p>
+        I'll be straight about where I'm standing. I'm early in this career, not twenty years
+        into it. What I have is an accounting background, a Google Data Analytics certificate,
+        and a portfolio of projects where I've done the unglamorous work end to end — including
+        one where the most valuable thing I produced was the sentence <em>"this number is
+        wrong."</em> Where I'm drawing on experience, I'll say so. Where I'm drawing on the
+        accumulated wisdom of the field, I'll say that too.
+      </p>
+
+      <div class="note">
+        <div class="note-title">Who this is for</div>
+        <p>
+          Complete beginners deciding whether this field is for them; self-taught learners who
+          know some Excel and SQL but can't see the whole map; and career-changers who need to
+          know what's actually worth learning in 2026. Skip around using the contents above —
+          it's built to be read in pieces.
+        </p>
+      </div>
+
+      <!-- ============ PART 1 ============ -->
+      <h2 id="history"><span class="h2-num">Part 01</span>Five thousand years of counting things</h2>
+
+      <p>
+        Data analysis feels like a modern job. It isn't. It's one of the oldest jobs there is —
+        arguably <em>the</em> oldest white-collar job — and knowing its history tells you
+        something useful about where it's going.
+      </p>
+
+      <p>
+        The earliest known writing isn't poetry or scripture. It's accounting. The clay tablets
+        recovered from Mesopotamia, dating back to roughly 3000 BCE, are overwhelmingly
+        administrative: tallies of grain, headcounts of livestock, records of who owed what to
+        whom. There's a serious argument among historians that writing was invented <em>because</em>
+        someone needed to keep track of inventory. The first data problem was a supply chain
+        problem.
+      </p>
+
+      <p>
+        From there, the through-line is remarkably consistent. Every few centuries, someone
+        figures out how to turn a pile of records into an argument.
+      </p>
+
+      <div class="hist">
+        <div class="hist-item">
+          <div class="hist-year">~3000 BCE</div>
+          <h4>Clay tablets in Mesopotamia</h4>
+          <p>Administrative records — grain, livestock, debts. Writing emerges hand-in-hand with bookkeeping.</p>
+        </div>
+        <div class="hist-item">
+          <div class="hist-year">1786</div>
+          <h4>William Playfair invents the chart</h4>
+          <p>In <em>The Commercial and Political Atlas</em>, Playfair introduces the line graph and bar chart; the pie chart follows in 1801. The visual grammar we still use every day was invented essentially all at once, by one Scottish engineer.</p>
+        </div>
+        <div class="hist-item">
+          <div class="hist-year">1854</div>
+          <h4>John Snow and the Broad Street pump</h4>
+          <p>During a cholera outbreak in London, physician John Snow plots deaths on a street map and finds them clustered around a single water pump. The prevailing theory said cholera spread through bad air. His data said water. This is the founding story of the field: a hypothesis, tested against spatial data, that overturned an expert consensus.</p>
+        </div>
+        <div class="hist-item">
+          <div class="hist-year">1850s</div>
+          <h4>Florence Nightingale's polar diagrams</h4>
+          <p>Nightingale used what are now called polar area diagrams to show that most British soldiers in the Crimean War were dying of preventable disease, not battle wounds. She wasn't just recording data — she was designing it to persuade a government. Data visualization as advocacy.</p>
+        </div>
+        <div class="hist-item">
+          <div class="hist-year">1890</div>
+          <h4>Hollerith's punch cards</h4>
+          <p>The 1880 US Census took years to tabulate by hand. Herman Hollerith's electromechanical tabulating machine, using punched cards, dramatically compressed the 1890 count. His company later became part of what we know today as IBM. The first time machinery beat humans at counting.</p>
+        </div>
+        <div class="hist-item">
+          <div class="hist-year">1970</div>
+          <h4>Codd's relational model</h4>
+          <p>Edgar F. Codd, at IBM, publishes <em>A Relational Model of Data for Large Shared Data Banks</em>. Data gets organized into tables with relationships between them. Nearly every database you'll touch is a descendant of this paper.</p>
+        </div>
+        <div class="hist-item">
+          <div class="hist-year">early 1970s</div>
+          <h4>SQL is born</h4>
+          <p>Donald Chamberlin and Raymond Boyce at IBM build a query language for Codd's model, originally called SEQUEL. Fifty years later, it's still the single most valuable technical skill in this profession. Very little in tech has that shelf life.</p>
+        </div>
+        <div class="hist-item">
+          <div class="hist-year">1979–1985</div>
+          <h4>The spreadsheet arrives</h4>
+          <p>VisiCalc lands on the Apple II in 1979, Lotus 1-2-3 follows in 1983, and Microsoft Excel arrives in 1985. This is the decisive democratization: analysis escapes the data-processing department and lands on every desk in the building. Excel's continued dominance forty years later is not an accident.</p>
+        </div>
+        <div class="hist-item">
+          <div class="hist-year">1990s</div>
+          <h4>The data warehouse</h4>
+          <p>Bill Inmon and Ralph Kimball formalize how to consolidate operational data into a structure built for analysis rather than transactions. "Business intelligence" becomes a department.</p>
+        </div>
+        <div class="hist-item">
+          <div class="hist-year">2001–2006</div>
+          <h4>Big data</h4>
+          <p>Analyst Doug Laney frames data growth along three axes — volume, velocity, variety — the "three Vs." In 2006, Hadoop makes distributed processing of enormous datasets practical for ordinary companies. Scale stops being the constraint.</p>
+        </div>
+        <div class="hist-item">
+          <div class="hist-year">2003–2015</div>
+          <h4>Self-service BI</h4>
+          <p>Tableau (founded 2003, out of Stanford research) and later Microsoft's Power BI (2015) let analysts build interactive dashboards without engineering support. The bottleneck moves from "can we build the chart" to "do we know what to ask."</p>
+        </div>
+        <div class="hist-item">
+          <div class="hist-year">2020s</div>
+          <h4>The language model era</h4>
+          <p>AI systems become genuinely capable of writing queries, generating formulas, and summarizing datasets in plain language. Which brings us to the question everyone's actually asking — covered properly in Part 7.</p>
+        </div>
+      </div>
+
+      <div class="takeaway">
+        <div class="note-title">The pattern worth noticing</div>
+        <p>
+          Every single one of these waves made the <strong>mechanical</strong> part of analysis
+          cheaper — counting, tabulating, calculating, charting, querying. Not one of them made
+          the <strong>judgment</strong> part cheaper: knowing which question matters, noticing
+          when a number is lying to you, and convincing someone to act. Each time the mechanical
+          got cheaper, judgment got <em>more</em> valuable, because more people were now
+          producing numbers and fewer of those numbers were being checked.
+        </p>
+        <p>
+          Hold onto this. It's the single most useful thing in this entire guide, and it's the
+          lens for thinking about AI.
+        </p>
+      </div>
+
+      <!-- ============ PART 2 ============ -->
+      <h2 id="definitions"><span class="h2-num">Part 02</span>The vocabulary, defined properly</h2>
+
+      <p>
+        A lot of confusion in this field is vocabulary confusion. People use "data," "metric,"
+        and "insight" interchangeably, and then wonder why meetings go in circles. Here's the
+        vocabulary, defined in a way you can actually use.
+      </p>
+
+      <h3>The ladder: data → information → insight → decision</h3>
+
+      <p>
+        This is the most important distinction in the whole discipline, and most people
+        stop climbing one rung too early.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Rung</th><th>What it is</th><th>Example</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Data</strong></td>
+              <td>Raw, unprocessed facts. Meaningless alone.</td>
+              <td><code>4821, 3.64, "Google Ads"</code></td>
+            </tr>
+            <tr>
+              <td><strong>Information</strong></td>
+              <td>Data with context and structure attached.</td>
+              <td>"Google Ads returned 3.64x on ad spend last quarter."</td>
+            </tr>
+            <tr>
+              <td><strong>Insight</strong></td>
+              <td>Information compared against an expectation, revealing something non-obvious.</td>
+              <td>"Google Ads is our largest budget line at 36% of spend, but it's underperforming its 4.0x target — the biggest single lever we have."</td>
+            </tr>
+            <tr>
+              <td><strong>Decision</strong></td>
+              <td>An action someone takes because of the insight.</td>
+              <td>"Move 15% of Google Ads budget to Facebook and re-measure in six weeks."</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Junior analysts deliver information and think they've delivered insight. The test is
+        simple: <strong>if your output doesn't change what anybody does, it wasn't insight.</strong>
+        A dashboard nobody acts on is an expensive decoration.
+      </p>
+
+      <h3>Types of data</h3>
+
+      <p><strong>By structure:</strong></p>
+      <ul>
+        <li><strong>Structured</strong> — fits neatly in rows and columns. Sales tables, transaction logs, spreadsheets. This is where you'll spend most of your career.</li>
+        <li><strong>Semi-structured</strong> — has organizational markers but no rigid schema. JSON, XML, email.</li>
+        <li><strong>Unstructured</strong> — no predefined model. Free-text reviews, images, audio, video. Historically hard to analyze; increasingly tractable with modern tooling.</li>
+      </ul>
+
+      <p><strong>By measurement type</strong> (this determines which statistics and charts are even legal):</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Level</th><th>Meaning</th><th>Example</th><th>What you can do</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Nominal</strong></td>
+              <td>Named categories, no order</td>
+              <td>Channel, country, gender</td>
+              <td>Count, mode. No averages.</td>
+            </tr>
+            <tr>
+              <td><strong>Ordinal</strong></td>
+              <td>Ordered categories, uneven gaps</td>
+              <td>"Poor / Fair / Good", rankings</td>
+              <td>Median, percentiles. Averaging is dubious.</td>
+            </tr>
+            <tr>
+              <td><strong>Interval</strong></td>
+              <td>Ordered, even gaps, no true zero</td>
+              <td>Temperature in °C, calendar years</td>
+              <td>Add and subtract. Ratios are meaningless.</td>
+            </tr>
+            <tr>
+              <td><strong>Ratio</strong></td>
+              <td>Ordered, even gaps, true zero</td>
+              <td>Revenue, weight, clicks, age</td>
+              <td>Everything, including ratios and percentages.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note warn">
+        <div class="note-title">A trap worth avoiding</div>
+        <p>
+          Averaging a satisfaction rating of "1 to 5 stars" gives you 3.7 — a number that looks
+          rigorous and means very little, because the distance from 1 to 2 isn't necessarily the
+          same as from 4 to 5. It's ordinal data being treated as ratio data. Everyone does it.
+          Know that you're doing it, and check the distribution rather than trusting the mean.
+        </p>
+      </div>
+
+      <h3>Metrics, dimensions, and KPIs</h3>
+
+      <ul>
+        <li><strong>Metric</strong> — something you measure. Revenue, clicks, conversion rate.</li>
+        <li><strong>Dimension</strong> — something you slice a metric by. Channel, region, month, device.</li>
+        <li><strong>KPI</strong> — a metric someone is actually accountable for. Every KPI is a metric; very few metrics deserve to be KPIs. If everything is a KPI, nothing is.</li>
+        <li><strong>Benchmark</strong> — the expected value you compare against. Without one, a number is just a number. <em>"ROAS was 3.64x"</em> is information. <em>"ROAS was 3.64x against a 4.0x target"</em> is the start of an insight.</li>
+        <li><strong>Variance</strong> — the gap between actual and expected. This is where nearly all real analysis lives.</li>
+      </ul>
+
+      <h3>The four types of analytics</h3>
+
+      <p>
+        This is the standard maturity model, and it's genuinely useful for locating yourself
+        and your organization.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Type</th><th>Question</th><th>Example</th><th>Difficulty</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Descriptive</strong></td>
+              <td>What happened?</td>
+              <td>Revenue fell 12% in Q2.</td>
+              <td>Foundational</td>
+            </tr>
+            <tr>
+              <td><strong>Diagnostic</strong></td>
+              <td>Why did it happen?</td>
+              <td>The fall is concentrated in one region after a price change.</td>
+              <td>Where analysts earn their keep</td>
+            </tr>
+            <tr>
+              <td><strong>Predictive</strong></td>
+              <td>What is likely to happen?</td>
+              <td>At this trend, Q3 lands 8% below plan.</td>
+              <td>Statistics / ML territory</td>
+            </tr>
+            <tr>
+              <td><strong>Prescriptive</strong></td>
+              <td>What should we do about it?</td>
+              <td>Reverse the price change in that region; hold elsewhere and compare.</td>
+              <td>Requires business judgment, not just math</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Most job postings that say "data analyst" mean descriptive and diagnostic, with the
+        occasional forecast. That's not a lesser job — diagnostic work is the hardest thinking
+        in the stack, and it's what actually moves companies.
+      </p>
+
+      <h3>Statistical concepts you cannot skip</h3>
+
+      <ul>
+        <li><strong>Population vs. sample</strong> — the whole group vs. the subset you measured. Nearly everything you analyze is a sample, and samples have error bars even when your spreadsheet doesn't show them.</li>
+        <li><strong>Mean, median, mode</strong> — the mean is the most-used and least-robust. One billionaire in a room of ten people makes the mean income absurd; the median doesn't budge. <strong>When a distribution is skewed, report the median.</strong></li>
+        <li><strong>Distribution</strong> — the shape of your data. Look at it before you summarize it. A histogram takes thirty seconds and prevents entire categories of embarrassment.</li>
+        <li><strong>Variance and standard deviation</strong> — how spread out values are. Two datasets with identical means can behave completely differently.</li>
+        <li><strong>Outlier</strong> — a value far from the rest. Critically: an outlier is a <em>question</em>, not a nuisance. Sometimes it's a typo. Sometimes it's fraud. Sometimes it's your most important customer.</li>
+        <li><strong>Correlation vs. causation</strong> — the one everyone can recite and few genuinely internalize. Correlation means two things move together. Causation means one drives the other. Establishing causation almost always requires an experiment or a very careful design, not a bigger dataset.</li>
+        <li><strong>Statistical significance</strong> — a measure of how likely your result is to be noise. Useful, routinely abused, and not the same as <em>practical</em> significance. A statistically significant 0.1% improvement may be worth exactly nothing.</li>
+        <li><strong>Simpson's paradox</strong> — a trend that appears in several groups can reverse when the groups are combined. It's the reason "always check the segments" is a rule and not a suggestion.</li>
+      </ul>
+
+      <div class="pull">
+        The goal isn't to know statistics. It's to know when a number deserves to be trusted.
+      </div>
+
+      <!-- ============ PART 3 ============ -->
+      <h2 id="roles"><span class="h2-num">Part 03</span>Analyst, scientist, engineer: who does what</h2>
+
+      <p>
+        Job titles in this field are notoriously inconsistent — the same title means different
+        things at different companies. But the underlying functions are real, and understanding
+        them tells you what to learn and what to apply for.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Role</th><th>Core job</th><th>Typical tools</th><th>Distinguishing skill</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Data Analyst</strong></td>
+              <td>Answer business questions with existing data; report and explain findings.</td>
+              <td>SQL, Excel, Power BI / Tableau</td>
+              <td>Translating a vague business question into a precise, answerable one.</td>
+            </tr>
+            <tr>
+              <td><strong>BI Analyst / Developer</strong></td>
+              <td>Build and maintain the reporting layer the whole company relies on.</td>
+              <td>Power BI, Tableau, SQL, data modeling</td>
+              <td>Designing dashboards people actually use, and keeping definitions consistent.</td>
+            </tr>
+            <tr>
+              <td><strong>Analytics Engineer</strong></td>
+              <td>Transform raw data into clean, documented, trustworthy tables for analysts.</td>
+              <td>SQL, dbt, warehouses, Git</td>
+              <td>Software engineering discipline applied to data modeling.</td>
+            </tr>
+            <tr>
+              <td><strong>Data Engineer</strong></td>
+              <td>Build the pipelines and infrastructure that move and store data at scale.</td>
+              <td>Python, Spark, cloud platforms, orchestration</td>
+              <td>Systems design and reliability.</td>
+            </tr>
+            <tr>
+              <td><strong>Data Scientist</strong></td>
+              <td>Statistical modeling, experimentation, prediction.</td>
+              <td>Python/R, statistics, ML libraries</td>
+              <td>Rigorous inference and model building.</td>
+            </tr>
+            <tr>
+              <td><strong>ML Engineer</strong></td>
+              <td>Put models into production and keep them running.</td>
+              <td>Python, ML frameworks, deployment tooling</td>
+              <td>Production engineering for models.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note good">
+        <div class="note-title">Practical advice on where to start</div>
+        <p>
+          Start as a data analyst. It's the most accessible entry point, it's the role where you
+          learn the business fastest, and every other role on this list is reachable from it.
+          Analytics engineering and data science are both natural second moves — and analysts
+          who move into them are usually better at those jobs than people who started there,
+          because they know what a stakeholder actually needs.
+        </p>
+      </div>
+
+      <!-- ============ PART 4 ============ -->
+      <h2 id="lifecycle"><span class="h2-num">Part 04</span>The lifecycle: how a real analysis actually runs</h2>
+
+      <p>
+        There are several standard frameworks for this. The one I learned through the Google
+        Data Analytics certificate uses six phases, and I'll use it here because it maps well
+        onto how the work genuinely feels. What matters isn't the labels — it's knowing what
+        goes wrong at each stage.
+      </p>
+
+      <h3>1. Ask — define the question</h3>
+
+      <p>
+        Someone comes to you with a request. It is almost never the real question. "Can you
+        pull last month's sales numbers?" usually means "I think something is wrong and I'm
+        trying to work out what." Your first job is to find the decision hiding behind the
+        request.
+      </p>
+
+      <p>Questions to ask before touching any data:</p>
+      <ul>
+        <li>What decision will this inform? Who makes it?</li>
+        <li>What would you do differently if the answer were X versus Y? <em>(If the answer is "nothing," stop — you've found a curiosity, not a project.)</em></li>
+        <li>What's the deadline, and what precision does the decision actually require?</li>
+        <li>Is there a number you're expecting? What would surprise you?</li>
+      </ul>
+
+      <p><strong>Where it goes wrong:</strong> you answer the question as asked, spend two days on it, and deliver something technically correct and completely useless.</p>
+
+      <h3>2. Prepare — find and collect the data</h3>
+
+      <p>
+        Identify what data exists, where it lives, who owns it, and whether you're allowed to
+        use it. Understand how it was collected, because collection method determines what
+        conclusions are legitimate. Survey data has selection bias. Log data has instrumentation
+        gaps. Nothing is neutral.
+      </p>
+
+      <p><strong>Where it goes wrong:</strong> you use a table without understanding what a row represents. Getting the <em>grain</em> of a table wrong — is one row a transaction, a customer, a customer-month? — poisons everything downstream.</p>
+
+      <h3>3. Process — clean and validate</h3>
+
+      <p>
+        This is where the majority of your time goes. It's also where most of your value gets
+        created, which is the opposite of what beginners expect. Part 6 covers this properly
+        because it deserves its own section.
+      </p>
+
+      <p>The core moves: deduplicate, standardize text and formats, handle missing values deliberately, fix data types, investigate outliers, and <strong>document every decision</strong>.</p>
+
+      <p><strong>Where it goes wrong:</strong> silent cleaning. You quietly drop 40 rows, never mention it, and nobody — including future you — can reproduce the number.</p>
+
+      <h3>4. Analyze — find the pattern</h3>
+
+      <p>
+        Aggregate, segment, compare against benchmarks, look at trends over time, test the
+        obvious explanations before the exotic ones. Good analysis is mostly disciplined
+        comparison: this segment vs. that one, this month vs. last, actual vs. target.
+      </p>
+
+      <p><strong>Where it goes wrong:</strong> confirmation bias. You find the answer someone wanted and stop looking. The discipline is to spend equal energy trying to break your own finding.</p>
+
+      <h3>5. Share — communicate the finding</h3>
+
+      <p>
+        Lead with the answer, not the methodology. Your stakeholder doesn't care how many joins
+        you wrote. Structure it as: <strong>here's what I found, here's what it means, here's
+        what I'd do, here's what I'm uncertain about.</strong> That last part builds more trust
+        than false confidence ever will.
+      </p>
+
+      <p>
+        Choose charts that match the question: line for trends over time, bar for comparing
+        categories, scatter for relationships between two variables. And label your axes — an
+        unlabelled chart is a rumour.
+      </p>
+
+      <p><strong>Where it goes wrong:</strong> burying the finding on slide 14 after thirteen slides of methodology.</p>
+
+      <h3>6. Act — and then measure whether it worked</h3>
+
+      <p>
+        The phase everyone forgets. If a recommendation is taken, the analysis isn't finished —
+        you now have a natural experiment. Did the change do what you predicted? Analysts who
+        close this loop become trusted very quickly, because they're the only ones keeping score.
+      </p>
+
+      <!-- ============ PART 5 ============ -->
+      <h2 id="ladder"><span class="h2-num">Part 05</span>Zero to mastery: the four levels</h2>
+
+      <p>
+        Here's the honest version of the skill ladder — what each level looks like, what to
+        build, and how to know you've actually reached it rather than just watched a video
+        about it.
+      </p>
+
+      <p>
+        One piece of advice before the levels, and it's the most practically useful thing in
+        this section: <strong>learn in this order — Excel, then SQL, then a BI tool, then
+        statistics, then Python.</strong> Not because Python is unimportant, but because
+        beginners who start with Python spend six months learning to program and zero months
+        learning to analyze. Excel teaches you to think in tables. SQL teaches you to think in
+        sets. Both transfer. Start where the feedback loop is fastest.
+      </p>
+
+      <div class="level">
+        <span class="level-tag">Level 0 · Foundation</span>
+        <h3>You can work with a spreadsheet without fear</h3>
+        <p>The entry point. Nothing here is impressive, and all of it is load-bearing.</p>
+        <ul>
+          <li>Spreadsheet basics: cell references (relative vs. absolute), sorting, filtering, freezing panes</li>
+          <li>Core formulas: <code>SUM</code>, <code>AVERAGE</code>, <code>COUNT</code>, <code>IF</code>, <code>COUNTIF</code></li>
+          <li>Basic charts, and knowing which chart suits which question</li>
+          <li>Descriptive statistics: mean, median, min, max, percentage change</li>
+          <li>The habit of asking "compared to what?" every time you see a number</li>
+        </ul>
+        <div class="level-check">✓ Checkpoint: you can take a raw CSV of a few hundred rows and produce a summary table plus a chart that answers a specific question.</div>
+      </div>
+
+      <div class="level">
+        <span class="level-tag">Level 1 · Working Analyst</span>
+        <h3>You can be trusted with a real question</h3>
+        <p>This is roughly the junior-analyst hiring bar. It's achievable in six to nine months of serious self-study.</p>
+        <ul>
+          <li><strong>Advanced Excel:</strong> PivotTables and PivotCharts, <code>INDEX/MATCH</code> or <code>XLOOKUP</code>, <code>SUMIFS</code>/<code>COUNTIFS</code>/<code>AVERAGEIFS</code>, <code>IFS</code> logic, text functions (<code>TRIM</code>, <code>SUBSTITUTE</code>, <code>VALUE</code>), conditional formatting, Power Query for messy imports</li>
+          <li><strong>SQL fundamentals:</strong> <code>SELECT</code>, <code>WHERE</code>, <code>GROUP BY</code>, <code>HAVING</code>, <code>ORDER BY</code>, and all four join types — genuinely understanding joins, not memorizing them</li>
+          <li><strong>One BI tool</strong> (Power BI or Tableau): connect data, build a dashboard, make it filterable</li>
+          <li><strong>Data cleaning:</strong> deduplication, standardizing text, handling missing values, fixing types</li>
+          <li><strong>Communication:</strong> writing up findings in plain language for someone non-technical</li>
+        </ul>
+        <div class="level-check">✓ Checkpoint: you can take a messy, unfamiliar dataset and independently produce a documented, cross-checked analysis with written findings — and defend every number in it.</div>
+      </div>
+
+      <div class="level">
+        <span class="level-tag">Level 2 · Professional</span>
+        <h3>You own analyses end to end</h3>
+        <p>Where you become the person others come to. Typically one to three years of real work.</p>
+        <ul>
+          <li><strong>Advanced SQL:</strong> CTEs, window functions (<code>RANK</code>, <code>ROW_NUMBER</code>, <code>LAG</code>/<code>LEAD</code>, running totals via <code>PARTITION BY</code>), subqueries, <code>CASE</code> logic, query performance awareness</li>
+          <li><strong>Data modeling:</strong> star schemas, fact vs. dimension tables, grain, and why a badly modeled dashboard is both slow and wrong</li>
+          <li><strong>Applied statistics:</strong> distributions, confidence intervals, hypothesis testing, regression basics, and the limits of each</li>
+          <li><strong>Python for analysis:</strong> pandas for manipulation, matplotlib/seaborn for visualization, Jupyter for exploration — enough to automate the repetitive and go beyond what a spreadsheet can hold</li>
+          <li><strong>Stakeholder management:</strong> scoping requests, pushing back on bad questions, managing expectations on timelines</li>
+          <li><strong>Version control:</strong> Git, so your work is reproducible and reviewable</li>
+        </ul>
+        <div class="level-check">✓ Checkpoint: a stakeholder brings you a vague problem, and you scope it, solve it, and present a recommendation they act on — without supervision.</div>
+      </div>
+
+      <div class="level">
+        <span class="level-tag">Level 3 · Mastery</span>
+        <h3>You change what the organization asks</h3>
+        <p>The distinguishing feature here isn't technical. It's that you start setting the agenda rather than answering it.</p>
+        <ul>
+          <li><strong>Experimentation:</strong> designing A/B tests, understanding power and sample size, avoiding peeking, knowing when an experiment isn't possible and what to do instead</li>
+          <li><strong>Causal reasoning:</strong> confounders, selection bias, quasi-experimental approaches — and why "users who use feature X retain better" almost never means what people want it to mean</li>
+          <li><strong>Forecasting:</strong> time series, seasonality, and honest uncertainty ranges</li>
+          <li><strong>Metric design:</strong> defining the measures a company steers by, and understanding how each one will be gamed</li>
+          <li><strong>Influence:</strong> getting recommendations adopted by people who outrank you</li>
+          <li><strong>Teaching:</strong> raising the analytical standard of everyone around you</li>
+        </ul>
+        <div class="level-check">✓ Checkpoint: you've killed a project that the data didn't support, and been thanked for it.</div>
+      </div>
+
+      <div class="note">
+        <div class="note-title">On the word "mastery"</div>
+        <p>
+          Mastery in this field isn't a tool list you complete. I've deliberately written Level 3
+          as almost entirely non-technical, because that's the honest shape of it. The technical
+          ceiling arrives sooner than people expect; the judgment ceiling is effectively infinite.
+        </p>
+      </div>
+
+      <!-- ============ PART 6 ============ -->
+      <h2 id="craft"><span class="h2-num">Part 06</span>The part nobody teaches you</h2>
+
+      <p>
+        Courses teach tools. What follows is the craft — the things that matter far more than
+        knowing one more function, and which almost no curriculum covers properly.
+      </p>
+
+      <h3>Cleaning is the job, not the obstacle</h3>
+
+      <p>
+        The often-repeated figure is that analysts spend around 80% of their time preparing data
+        rather than analyzing it. Treat the exact number with suspicion — it's an estimate that
+        gets quoted far more confidently than it deserves — but the shape of it matches every
+        real project I've worked on.
+      </p>
+
+      <p>
+        Beginners experience this as a tax on the interesting part. It isn't. Cleaning is where
+        you learn what the data actually <em>is</em>, and it's where the highest-value findings
+        tend to hide. In my own marketing campaign project, the cleaning stage <em>was</em> the
+        analysis: 798 raw rows contained 18 duplicate campaign IDs, one channel name spelled
+        four different ways, and 103 blank cells. Anyone skipping straight to the pivot table
+        would have produced a confident, professional-looking report built on double-counted
+        campaigns and a channel split across four spellings.
+      </p>
+
+      <h3>The skeptic's reflex: "too good to be true" is a hypothesis</h3>
+
+      <p>This is the single habit I'd most want to pass on.</p>
+
+      <p>
+        In that same project, one channel showed a return on ad spend of 89.7x. Every other
+        channel sat between 2.5x and 4.7x. It accounted for 45% of all revenue on 3% of all spend.
+      </p>
+
+      <p>
+        The tempting move is to celebrate it. It's the best number in the dataset — it makes the
+        whole portfolio look extraordinary, and the blended return came out at 6.4x on the back
+        of it. The correct move is to distrust it. A result that far outside the range of
+        everything comparable is far more likely to be a defect than a discovery. It looked like
+        a units error in the source data — spend recorded at the wrong scale. Excluding it, the
+        real blended return was <strong>3.7x, not 6.4x</strong>. The headline number had been
+        inflated by roughly 73%.
+      </p>
+
+      <div class="note warn">
+        <div class="note-title">The rule</div>
+        <p>
+          When a number is dramatically better than its peers, your first hypothesis should be
+          that something is broken — not that you've found gold. Extraordinary results in
+          ordinary datasets are usually measurement failures. Check the units, check the grain,
+          check the join, and only then get excited.
+        </p>
+      </div>
+
+      <p>
+        Notice what the actual deliverable was there. It wasn't a chart. It was preventing a
+        company from believing a false number and setting budgets by it.
+        <strong>Sometimes the most valuable output of an analysis is "don't trust this."</strong>
+      </p>
+
+      <h3>Cross-check every important number two ways</h3>
+
+      <p>
+        If a figure is going in front of a decision-maker, calculate it by a second, independent
+        method and confirm the two agree. Build the summary as a PivotTable, then verify it with
+        <code>SUMIFS</code>. Write the SQL aggregate, then check the row count separately. It
+        costs a few minutes, and it's the difference between an analyst who is trusted and one
+        who is checked.
+      </p>
+
+      <h3>Document your decisions, not just your steps</h3>
+
+      <p>
+        "Imputed 61 missing spend values using the channel average; flagged 12 rows where region
+        was unrecoverable as Unknown" is worth more than any amount of tidy code. Cleaning
+        involves dozens of judgment calls, and an undocumented judgment call is
+        indistinguishable from a mistake six weeks later.
+      </p>
+
+      <h3>Learn the business, not just the tables</h3>
+
+      <p>
+        The analyst who understands why a metric matters will beat the more technical analyst
+        who doesn't, every time. If you can't explain how your company makes money and what
+        would make that number go up, your SQL skill has a hard ceiling. This is where an
+        accounting background turns out to be an unfair advantage — you already think in terms
+        of what reconciles and what doesn't.
+      </p>
+
+      <h3>Deliver the decision, not the dashboard</h3>
+
+      <p>
+        Nobody wants your analysis. They want to know what to do. Every deliverable should
+        answer: what did you find, what does it mean, what should we do, and how confident are
+        you. If you're explaining methodology before your finding, you've inverted it.
+      </p>
+
+      <div class="pull">
+        Being technically right is table stakes. Being <em>useful</em> is the job.
+      </div>
+
+      <!-- ============ PART 7 ============ -->
+      <h2 id="ai"><span class="h2-num">Part 07</span>AI vs. the data analyst: an honest assessment</h2>
+
+      <p>
+        This is the question underneath every "should I still learn data analysis" post, so
+        let's take it seriously rather than reassuringly. I'll give both arguments their
+        strongest form before drawing a conclusion, because the honest answer is genuinely mixed.
+      </p>
+
+      <h3>The strongest case that AI displaces analysts</h3>
+
+      <p>It goes like this, and it isn't stupid:</p>
+
+      <p>
+        A large share of what junior analysts do all day is mechanical translation — turning a
+        question into a query, a query result into a chart, and a chart into three bullet points.
+        Language models are now genuinely good at all three. They write competent SQL from a
+        plain-English description, generate spreadsheet formulas instantly, explain unfamiliar
+        code, and produce a reasonable first-pass summary of a dataset. The tasks that used to
+        constitute a junior analyst's first year are precisely the tasks that have become
+        cheapest.
+      </p>
+
+      <p>
+        Meanwhile, BI tools are embedding natural-language querying directly into the product,
+        so the stakeholder who used to file a ticket with the analytics team can increasingly
+        just ask the dashboard. If the analyst's role was to be a human interface between a
+        business question and a database, that interface is being automated. And organizations
+        that need fewer juniors hire fewer juniors — which breaks the pipeline that produces
+        seniors.
+      </p>
+
+      <h3>The strongest case that it doesn't</h3>
+
+      <p>Also not stupid:</p>
+
+      <p>
+        Every capability just listed operates on the mechanical layer — the layer that has been
+        automated continuously since Hollerith's punch cards in 1890. Look back at Part 1: the
+        spreadsheet automated the calculation, the warehouse automated the consolidation,
+        self-service BI automated the chart-building. Each wave was predicted to reduce the need
+        for analysts. Each one increased it, because cheaper analysis produced more analysis, and
+        more analysis produced more demand for someone who could tell which of it was trustworthy.
+      </p>
+
+      <p>
+        And trust is exactly where these systems remain weakest. An AI can write the query that
+        produces the 89.7x return. It has no particular reason to doubt the result — the query is
+        correct, the arithmetic is correct, the data says what it says. What it lacks is the
+        context to know that 89.7x is implausible for that channel, the instinct to suspect a
+        units error, and the standing to walk into a meeting and tell a marketing director that
+        the number they've been reporting to the board is wrong. The characteristic failure mode
+        is confident, fluent, well-formatted output that's wrong in a way requiring domain
+        knowledge to detect.
+      </p>
+
+      <div class="vs-grid">
+        <div class="vs-col ai">
+          <h4>What AI does genuinely well</h4>
+          <ul>
+            <li>Writing and explaining SQL, formulas, and code</li>
+            <li>Fast first-pass summaries of a dataset</li>
+            <li>Suggesting approaches you hadn't considered</li>
+            <li>Documentation, comments, and write-up drafts</li>
+            <li>Debugging errors and translating between tools</li>
+            <li>Teaching — an infinitely patient tutor for a self-learner</li>
+          </ul>
+        </div>
+        <div class="vs-col human">
+          <h4>What still requires a person</h4>
+          <ul>
+            <li>Knowing which question actually matters to the business</li>
+            <li>Recognizing that a technically correct number is wrong</li>
+            <li>Understanding how the data was collected, and its blind spots</li>
+            <li>Judging what's <em>practically</em> significant, not just statistically</li>
+            <li>Political navigation — delivering unwelcome findings</li>
+            <li>Accountability. Someone has to own the number.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Where I actually land</h3>
+
+      <p>
+        The honest synthesis, I think, is this: <strong>AI raises the floor and raises the bar at
+        the same time.</strong>
+      </p>
+
+      <p>
+        It raises the floor because a beginner can now do things that used to require a year of
+        training. Writing a window function is no longer a meaningful barrier to entry. That's
+        genuinely good, and it's a large part of why someone can self-teach this field from
+        anywhere in the world — including from Somalia, which is not a place with an abundance
+        of senior analysts to learn from.
+      </p>
+
+      <p>
+        It raises the bar because that same beginner is now competing against everyone else
+        holding the same tool. If your entire value proposition was "I can write SQL," that
+        proposition has depreciated sharply. What appreciates is everything the model can't
+        supply: business context, skepticism, accountability, and the ability to persuade.
+      </p>
+
+      <p>
+        The risk I take most seriously isn't job displacement, though — it's <strong>skill
+        hollowing</strong>. If you let AI write every query, you may never develop the intuition
+        that tells you a result is wrong. That intuition gets built by struggling through the
+        mechanical work, not by skipping it. There's a real trade-off between learning fast and
+        learning deeply, and beginners in particular should be deliberate about which one
+        they're optimizing for on any given day.
+      </p>
+
+      <div class="takeaway">
+        <div class="note-title">How I'd actually use it</div>
+        <p>
+          As a tutor and an accelerator, not a replacement for thinking. Write the query yourself
+          first, then ask it to critique yours. Have it explain concepts you're stuck on. Let it
+          draft documentation and boilerplate. But verify every number it produces independently,
+          and never present a finding you couldn't defend without it. The analyst who uses these
+          tools well will out-compete both the one who refuses to and the one who outsources
+          their judgment entirely.
+        </p>
+      </div>
+
+      <!-- ============ PART 8 ============ -->
+      <h2 id="roadmap"><span class="h2-num">Part 08</span>A twelve-month roadmap</h2>
+
+      <p>
+        Concrete, ordered, and realistic for someone studying part-time alongside other
+        commitments. Adjust the pace; don't reorder the sequence.
+      </p>
+
+      <div class="phase">
+        <div class="phase-time">Months 1–2</div>
+        <div>
+          <h4>Excel, properly</h4>
+          <p>Not "I've used Excel" — actually competent.</p>
+          <ul>
+            <li>PivotTables until they're boring, lookups (<code>XLOOKUP</code> / <code>INDEX-MATCH</code>), conditional aggregation, text cleaning functions</li>
+            <li>Learn Power Query early — it handles messy imports far better than formulas do</li>
+            <li><strong>Project:</strong> take any public messy CSV, clean it, and produce a one-page summary with three charts</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-time">Months 3–5</div>
+        <div>
+          <h4>SQL until it's second nature</h4>
+          <p>The highest-return skill on this entire list. Install PostgreSQL locally and work against real data rather than a browser sandbox.</p>
+          <ul>
+            <li>Weeks 1–3: <code>SELECT</code>, filtering, <code>GROUP BY</code>, all join types</li>
+            <li>Weeks 4–6: subqueries, <code>CASE</code>, date handling, CTEs</li>
+            <li>Weeks 7–12: window functions, and enough performance intuition to avoid embarrassing queries</li>
+            <li><strong>Project:</strong> pick a public dataset, load it, and answer 12–15 questions of increasing difficulty. Publish it with a README explaining your reasoning.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-time">Months 6–7</div>
+        <div>
+          <h4>One BI tool, learned deeply</h4>
+          <p>Power BI if you're targeting corporate roles, Tableau if you're drawn to visualization work. Learn one well rather than both badly.</p>
+          <ul>
+            <li>Data modeling: relationships, star schema, why a flat table eventually fails you</li>
+            <li>Calculated measures (DAX in Power BI), interactivity, filters</li>
+            <li>Dashboard design: fewer charts, clearer labels, one question per view</li>
+            <li><strong>Project:</strong> build a dashboard on top of your SQL project's data</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-time">Months 8–9</div>
+        <div>
+          <h4>Statistics you'll actually use</h4>
+          <p>Skip the theory-heavy course. Focus on applied understanding.</p>
+          <ul>
+            <li>Distributions, sampling, confidence intervals</li>
+            <li>Hypothesis testing — and what significance does and doesn't tell you</li>
+            <li>Correlation, regression basics, and the limits of both</li>
+            <li>A/B testing fundamentals</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-time">Months 10–12</div>
+        <div>
+          <h4>Python, and consolidation</h4>
+          <p>By now you know how to analyze; Python is about scale and automation.</p>
+          <ul>
+            <li>pandas for manipulation, matplotlib/seaborn for charts, Jupyter for exploration</li>
+            <li>Enough Git to version and publish your work</li>
+            <li><strong>Capstone:</strong> one end-to-end project — raw messy data through cleaning, analysis, visualization, and a written recommendation</li>
+            <li>Rewrite your earliest project. The gap between the two versions is the clearest evidence of growth you can show an employer.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>On portfolios</h3>
+
+      <p>
+        Three deep projects beat ten shallow ones. Recruiters aren't counting; they're looking for
+        evidence you can think. For each project the README matters as much as the code — state
+        the question, the cleaning decisions and why you made them, the findings with numbers,
+        and the recommendation.
+      </p>
+
+      <p>
+        Above all: <strong>use messy data.</strong> Anyone can produce a chart from a clean
+        tutorial dataset. The demonstration that gets you hired is showing what you did when the
+        data was broken — because that's what the job is, every day.
+      </p>
+
+      <!-- ============ CLOSE ============ -->
+      <h2 id="close"><span class="h2-num">Part 09</span>What it comes down to</h2>
+
+      <p>
+        Five thousand years ago someone in Mesopotamia pressed marks into wet clay because they
+        needed to know how much grain was in the store. In 1854 John Snow drew dots on a map
+        because he suspected the experts were wrong about cholera. Today an analyst opens a
+        spreadsheet because a number in a board deck doesn't look right.
+      </p>
+
+      <p>
+        It's the same job. The tools have changed beyond recognition — clay to punch cards to
+        spreadsheets to warehouses to models that write their own queries — and every single
+        change made the mechanical part cheaper. Not one of them replaced the person willing to
+        look at a confident number and ask whether it's true.
+      </p>
+
+      <p>
+        That's the whole discipline, really. Learn the tools, because you can't earn the right to
+        be skeptical without them. But understand that the tools are the entry fee, not the job.
+        The job is judgment: knowing what to ask, noticing what doesn't fit, and being willing to
+        say so.
+      </p>
+
+      <p>
+        If you're starting out — start. Get a messy dataset, clean it badly, then clean it
+        better. It's an unusually learnable field, and one of the few where an outsider with
+        persistence and an internet connection can build genuine, demonstrable competence from
+        anywhere.
+      </p>
+
+      <div class="post-foot">
+        <div class="author-box">
+          <div class="author-avatar">NS</div>
+          <div>
+            <h4>Nour Salepan</h4>
+            <p>
+              Data analyst working in SQL, advanced Excel, and Power BI, with an accounting
+              background and a habit of distrusting numbers that look too good. Based in Somalia,
+              open to remote roles.
+            </p>
+            <div class="card-links">
+              <a href="projects.html">See my projects →</a>
+              <a href="contact.html">Get in touch →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <a href="blog.html" class="btn btn-outline">← All posts</a>
+          <a href="projects.html" class="btn btn-primary">View my work</a>
+        </div>
+      </div>
+
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="container footer-wrap">
+    <span>© 2026 Nour Salepan</span>
+    <span><a href="https://github.com/Nour-salepan" target="_blank" rel="noopener">github.com/Nour-salepan</a></span>
+  </div>
+</footer>
+
+<script src="theme.js"></script>
+<script>
+  window.addEventListener('scroll', function () {
+    var bar = document.getElementById('progressBar');
+    if (!bar) return;
+    var h = document.documentElement;
+    var pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
+  });
+</script>
+</body>
+</html>
