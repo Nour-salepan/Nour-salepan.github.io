@@ -990,6 +990,12 @@ html[data-theme="light"] .sev-med  { color: #8a6d00; }
   color: #c8ccd8;
   overflow-x: auto;
   margin: 18px 0;
+  white-space: pre;
+  tab-size: 4;
+}
+
+@media (max-width: 720px) {
+  .terminal { font-size: 0.74rem; }
 }
 
 html[data-theme="light"] .terminal { background: #15151f; color: #d8dbe6; }
