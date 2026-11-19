@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nmap Crash Course: Scanning a Vulnerable Web App From Scratch — Nour Salepan</title>
+<meta name="description" content="A practical Nmap crash course — every flag that matters, worked end to end against a deliberately vulnerable web app until it gives up its database credentials.">
+<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="article.css">
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header>
+  <div class="nav-wrap">
+    <a href="index.html" class="logo"><span class="prompt">&gt;</span> nour.salepan</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">menu</button>
+    <nav>
+      <ul id="navList">
+        <li><a href="index.html">home</a></li>
+        <li><a href="projects.html">projects</a></li>
+        <li><a href="skills.html">skills</a></li>
+        <li><a href="experience.html">experience</a></li>
+        <li><a href="blog.html" class="active">blog</a></li>
+        <li><a href="contact.html">contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span class="knob">◐</span></button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <article class="article-wrap">
+
+    <div class="post-head">
+      <div class="eyebrow">crash course</div>
+      <h1>Nmap Crash Course: Scanning a Vulnerable Web App From Scratch</h1>
+      <p class="post-sub">
+        Every Nmap flag that actually matters, in the order you'd use them — worked end to end
+        against a deliberately vulnerable application until it hands over its database password.
+      </p>
+      <div class="post-meta">
+        <span>By Nour Salepan</span>
+        <span class="sep">·</span>
+        <span>November 2026</span>
+        <span class="sep">·</span>
+        <span>~20 min read</span>
+      </div>
+    </div>
+
+    <nav class="toc">
+      <div class="toc-title">Contents</div>
+      <ol>
+        <li><a href="#rules">Read this first: the legal part</a></li>
+        <li><a href="#lab">Build the lab</a></li>
+        <li><a href="#model">How scanning actually works</a></li>
+        <li><a href="#stage1">Stage 1 — Is anything there?</a></li>
+        <li><a href="#stage2">Stage 2 — Which doors are open?</a></li>
+        <li><a href="#stage3">Stage 3 — What's running behind them?</a></li>
+        <li><a href="#stage4">Stage 4 — NSE, where it gets interesting</a></li>
+        <li><a href="#chain">The finding: chaining two boring bugs</a></li>
+        <li><a href="#report">Turning output into a report</a></li>
+        <li><a href="#automate">Automating the whole thing</a></li>
+        <li><a href="#cheat">Cheat sheet</a></li>
+      </ol>
+    </nav>
+
+    <div class="prose">
+
+      <p class="lede">
+        Most Nmap tutorials hand you a wall of flags and leave you there. This one runs a single
+        scan sequence against a real target, end to end, and shows you the moment it stops being
+        a port list and becomes an actual vulnerability.
+      </p>
+
+      <p>
+        The target is DVWA — the Damn Vulnerable Web Application — running on my own machine.
+        By the end we'll have gone from "is this host even alive" to holding its database
+        username and password, using nothing but Nmap and a browser.
+      </p>
+
+      <!-- 01 -->
+      <h2 id="rules"><span class="h2-num">Part 01</span>Read this first: the legal part</h2>
+
+      <div class="note warn">
+        <div class="note-title">Not optional</div>
+        <p>
+          Port scanning a system you don't own or have written permission to test is a crime in
+          most countries — including when nothing breaks and you meant no harm. Intent is not a
+          defence. "I was learning" is not a defence.
+        </p>
+      </div>
+
+      <p>Legitimate targets, and this list is basically exhaustive for a beginner:</p>
+
+      <ul>
+        <li><strong>Your own machines</strong> — a VM or container on your laptop</li>
+        <li><strong><code>scanme.nmap.org</code></strong> — run by the Nmap project explicitly for this, though don't hammer it</li>
+        <li><strong>TryHackMe, Hack The Box, PortSwigger Labs</strong> — purpose-built and authorised</li>
+        <li><strong>A client who has signed a scope document</strong> — once you're doing this professionally</li>
+      </ul>
+
+      <p>
+        Everything below runs against <code>localhost</code>. Nothing leaves my machine. Develop
+        that habit now, because the difference between a security analyst and a defendant is
+        paperwork.
+      </p>
+
+      <!-- 02 -->
+      <h2 id="lab"><span class="h2-num">Part 02</span>Build the lab</h2>
+
+      <p>
+        You need two things: Nmap, and something to point it at.
+      </p>
+
+      <div class="terminal">
+<span class="cmt"># install nmap</span>
+<span class="prompt-sym">$</span> sudo apt install nmap          <span class="cmt"># Debian / Ubuntu / Kali</span>
+<span class="prompt-sym">$</span> brew install nmap              <span class="cmt"># macOS</span>
+
+<span class="cmt"># confirm it's there</span>
+<span class="prompt-sym">$</span> nmap --version
+
+<span class="cmt"># spin up DVWA locally on port 8080</span>
+<span class="prompt-sym">$</span> docker run --rm -it -p 8080:80 vulnerables/web-dvwa
+      </div>
+
+      <p>
+        That's the whole lab. A deliberately broken web app, reachable only from your own
+        machine, that you can scan as aggressively as you like.
+      </p>
+
+      <!-- 03 -->
+      <h2 id="model"><span class="h2-num">Part 03</span>How scanning actually works</h2>
+
+      <p>
+        Before the flags, the mental model — because without it the output is noise.
+      </p>
+
+      <p>
+        A <strong>port</strong> is a numbered door on a machine, 1 through 65535. A service sits
+        behind a door and listens. Web servers usually listen on 80 or 443, SSH on 22, and so on.
+        Scanning is the process of knocking on doors and recording which ones answer.
+      </p>
+
+      <p>
+        The knock itself relies on the <strong>TCP three-way handshake</strong> — how every TCP
+        connection on the internet begins:
+      </p>
+
+      <div class="flow">
+        <div class="flow-step"><span class="flow-num">01</span><h4>SYN</h4><p>are you open?</p></div>
+        <div class="flow-step"><span class="flow-num">02</span><h4>SYN-ACK</h4><p>yes, I'm here</p></div>
+        <div class="flow-step"><span class="flow-num">03</span><h4>ACK</h4><p>connection made</p></div>
+        <div class="flow-step"><span class="flow-num">04</span><h4>RST</h4><p>or: go away</p></div>
+      </div>
+
+      <p>
+        A <strong>SYN scan</strong> (<code>-sS</code>) sends the first packet, reads the reply,
+        and then deliberately never completes the handshake. Faster, and historically quieter in
+        logs. It needs root. A <strong>connect scan</strong> (<code>-sT</code>) completes the
+        full handshake using the operating system's normal networking, which needs no privileges
+        but is slower and far more visible.
+      </p>
+
+      <p>Nmap reports each port in one of these states, and the ambiguous ones matter:</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>State</th><th>What it means</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>open</strong></td><td>Something is listening. This is what you're hunting.</td></tr>
+            <tr><td><strong>closed</strong></td><td>The host replied, but nothing is listening there. Still useful — it proves the host is alive.</td></tr>
+            <tr><td><strong>filtered</strong></td><td>No reply at all. A firewall is probably swallowing the packets. You've learned something about the defences, not the service.</td></tr>
+            <tr><td><strong>open|filtered</strong></td><td>Nmap genuinely can't tell. Common in UDP scans.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <div class="note-title">The distinction worth internalising</div>
+        <p>
+          <strong>closed</strong> means the door exists and is shut. <strong>filtered</strong>
+          means something is stopping you from even reaching the door. Beginners treat both as
+          "nothing there" and miss that filtered tells you a firewall exists.
+        </p>
+      </div>
+
+      <!-- 04 -->
+      <h2 id="stage1"><span class="h2-num">Part 04</span>Stage 1 — Is anything there?</h2>
+
+      <p>
+        Host discovery. Don't scan 65535 ports on a machine that's switched off.
+      </p>
+
+      <div class="terminal">
+<span class="prompt-sym">$</span> nmap -sn localhost
+
+Starting Nmap
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000090s latency).
+      </div>
+
+      <p>
+        <code>-sn</code> means "ping scan, skip the ports." On a network you'd sweep a whole
+        range — <code>nmap -sn 192.168.1.0/24</code> — to map what exists before touching
+        anything.
+      </p>
+
+      <p>
+        The inverse flag is <code>-Pn</code>: <em>skip discovery, assume it's up.</em> Reach for
+        it when a host blocks pings but you're confident it's alive — otherwise Nmap gives up
+        before scanning a perfectly live machine.
+      </p>
+
+      <!-- 05 -->
+      <h2 id="stage2"><span class="h2-num">Part 05</span>Stage 2 — Which doors are open?</h2>
+
+      <p>By default Nmap checks the 1000 most common ports. That's a reasonable start and an unreasonable finish.</p>
+
+      <div class="terminal">
+<span class="cmt"># default: top 1000 ports</span>
+<span class="prompt-sym">$</span> nmap localhost
+
+<span class="cmt"># all 65535 — slower, but finds the things hiding high up</span>
+<span class="prompt-sym">$</span> nmap -p- localhost
+
+<span class="cmt"># specific ports</span>
+<span class="prompt-sym">$</span> nmap -p 80,443,8080 localhost
+
+<span class="cmt"># a range</span>
+<span class="prompt-sym">$</span> nmap -p 1-1000 localhost
+
+<span class="cmt"># quick triage: top 100 only</span>
+<span class="prompt-sym">$</span> nmap --top-ports 100 localhost
+      </div>
+
+      <p>Against our DVWA box, the full scan returns exactly one door:</p>
+
+      <div class="terminal">
+<span class="prompt-sym">$</span> nmap -p- localhost
+
+PORT     STATE SERVICE
+8080/tcp open  http-proxy
+      </div>
+
+      <p>
+        One open port. The <code>SERVICE</code> column here is a <em>guess</em> — Nmap is reading
+        port 8080 off a lookup table and assuming "probably an HTTP proxy." It has not actually
+        checked. Proving what's really there is the next stage, and treating that column as fact
+        is one of the most common beginner mistakes.
+      </p>
+
+      <h3>Scan types and speed</h3>
+
+      <div class="terminal">
+<span class="prompt-sym">$</span> sudo nmap -sS localhost        <span class="cmt"># SYN / stealth scan (needs root)</span>
+<span class="prompt-sym">$</span> nmap -sT localhost             <span class="cmt"># TCP connect (no root)</span>
+<span class="prompt-sym">$</span> sudo nmap -sU localhost        <span class="cmt"># UDP — slow, often skipped, often where the gold is</span>
+
+<span class="cmt"># timing: -T0 paranoid ... -T5 insane. -T4 is the sensible default</span>
+<span class="prompt-sym">$</span> nmap -T4 -p- localhost
+      </div>
+
+      <div class="note">
+        <div class="note-title">On timing</div>
+        <p>
+          <code>-T4</code> is fine on your own network. <code>-T5</code> drops packets and lies
+          to you. On a client engagement, slower is often required — fast scans trip intrusion
+          detection and can knock fragile services over. Speed is a trade against accuracy and
+          stealth, not a free win.
+        </p>
+      </div>
+
+      <!-- 06 -->
+      <h2 id="stage3"><span class="h2-num">Part 06</span>Stage 3 — What's running behind them?</h2>
+
+      <p>
+        This is where guessing stops. <code>-sV</code> interrogates the port and reads the
+        software's own banner back.
+      </p>
+
+      <div class="terminal">
+<span class="prompt-sym">$</span> nmap -sV -p 8080 localhost
+
+PORT     STATE SERVICE VERSION
+8080/tcp open  http    Apache httpd 2.4.25 ((Debian))
+      </div>
+
+      <p>
+        That one line changes everything. It isn't "probably a proxy" any more — it's
+        <strong>Apache 2.4.25 on Debian</strong>. An exact version is a search query: an attacker
+        pastes it into a CVE database and gets a list of known vulnerabilities for that build.
+      </p>
+
+      <p>And OS detection, which needs root:</p>
+
+      <div class="terminal">
+<span class="prompt-sym">$</span> sudo nmap -O localhost
+
+Running: Linux 4.X
+OS details: Linux 4.15 - 5.6
+      </div>
+
+      <p>
+        There's a shortcut that does several of these at once: <code>-A</code> runs version
+        detection, OS detection, default scripts and traceroute together. Convenient, and loud —
+        it is not subtle and shouldn't be your first move against anything sensitive.
+      </p>
+
+      <!-- 07 -->
+      <h2 id="stage4"><span class="h2-num">Part 07</span>Stage 4 — NSE, where it gets interesting</h2>
+
+      <p>
+        The Nmap Scripting Engine is the part that turns Nmap from a port lister into a
+        reconnaissance tool. Hundreds of scripts ship with it, grouped into categories —
+        <code>default</code>, <code>discovery</code>, <code>vuln</code>, <code>safe</code>,
+        <code>intrusive</code>, <code>brute</code> and more.
+      </p>
+
+      <div class="terminal">
+<span class="cmt"># run the default script set</span>
+<span class="prompt-sym">$</span> nmap -sC -p 8080 localhost
+
+<span class="cmt"># pick specific scripts</span>
+<span class="prompt-sym">$</span> nmap --script=http-enum,http-headers,http-methods -p 8080 localhost
+
+<span class="cmt"># a whole category</span>
+<span class="prompt-sym">$</span> nmap --script=vuln -p 8080 localhost
+
+<span class="cmt"># what does this script even do?</span>
+<span class="prompt-sym">$</span> nmap --script-help=http-enum
+      </div>
+
+      <p>Here's the run that mattered. Three scripts against our one open port:</p>
+
+      <div class="terminal">
+<span class="prompt-sym">$</span> nmap --script=http-enum,http-headers,http-methods -p 8080 localhost
+
+PORT     STATE SERVICE
+8080/tcp open  http
+| http-enum:
+|   /login.php: Possible admin folder
+|_  <span class="st">/config/: Potentially interesting directory w/ listing</span>
+| http-headers:
+|_  Server: Apache/2.4.25 (Debian)
+| http-methods:
+|_  Supported Methods: GET HEAD POST OPTIONS
+      </div>
+
+      <p>Three separate pieces of intelligence from one command:</p>
+
+      <ul>
+        <li><strong><code>http-methods</code></strong> — only GET, HEAD, POST and OPTIONS. No PUT or DELETE. That's genuinely good news for the defenders; PUT can often be abused to upload a shell.</li>
+        <li><strong><code>http-headers</code></strong> — the server is advertising its exact version. Minor on its own, but it's free reconnaissance handed to an attacker.</li>
+        <li><strong><code>http-enum</code></strong> — and here it is: <code>/config/</code>, <em>a directory with listing enabled.</em></li>
+      </ul>
+
+      <div class="note good">
+        <div class="note-title">The moment to pay attention</div>
+        <p>
+          "Potentially interesting directory w/ listing" is Nmap telling you a door has been left
+          propped open. Directory listing means that instead of a web page, the server shows you
+          the raw contents of the folder — every file in it, by name. A folder called
+          <code>config</code> is exactly where you'd expect secrets to live.
+        </p>
+      </div>
+
+      <!-- 08 -->
+      <h2 id="chain"><span class="h2-num">Part 08</span>The finding: chaining two boring bugs</h2>
+
+      <p>
+        Nmap has done its job. The rest is a browser and about ninety seconds of thinking.
+      </p>
+
+      <p>Open the directory it flagged:</p>
+
+      <div class="terminal">
+http://localhost:8080/config/
+
+Index of /config
+  config.inc.php
+  <span class="st">config.inc.php.bak</span>
+  <span class="st">config.inc.php.dist</span>
+      </div>
+
+      <p>
+        Three files. The first is harmless — request <code>config.inc.php</code> and the server
+        executes it as PHP, so you get the <em>output</em>, which is nothing. The source stays
+        hidden. That's how it's supposed to work.
+      </p>
+
+      <p>
+        But <code>.bak</code> is not a file extension Apache knows how to execute. So when you
+        ask for it, the server does the only thing it can: it sends you the file. As plain text.
+      </p>
+
+      <div class="terminal">
+http://localhost:8080/config/config.inc.php.bak
+
+  db_user     = 'app'
+  <span class="st">db_password = 'vulnerables'</span>
+  db_database = 'dvwa'
+      </div>
+
+      <p>
+        That's the database password, read out of a web browser by an unauthenticated stranger.
+        No exploit, no payload, no CVE. Two configuration mistakes that are individually
+        unremarkable:
+      </p>
+
+      <div class="finding-row">
+        <span class="sev sev-med">MEDIUM</span>
+        <div class="f-text"><strong>Directory listing enabled</strong> — on its own, this just leaks filenames. Untidy, not fatal.</div>
+      </div>
+
+      <div class="finding-row">
+        <span class="sev sev-high">HIGH</span>
+        <div class="f-text"><strong>A backup file left in the web root</strong> — on its own, this is only dangerous if someone knows the filename to guess.</div>
+      </div>
+
+      <div class="finding-row">
+        <span class="sev sev-crit">CRITICAL</span>
+        <div class="f-text"><strong>Both together</strong> — the listing tells you the filename, and the backup serves you the contents. Full database credentials.</div>
+      </div>
+
+      <div class="takeaway">
+        <div class="note-title">This is what real breaches look like</div>
+        <p>
+          Not a genius defeating encryption. A sequence of small, individually forgivable
+          mistakes that line up. The Equifax breach was an unapplied patch. Countless others are
+          an exposed backup, a default password, a storage bucket set to public.
+        </p>
+        <p>
+          Which is why the useful skill isn't memorising exploits — it's noticing when two
+          unremarkable findings combine into one serious one.
+        </p>
+      </div>
+
+      <h3>The fixes, all cheap</h3>
+
+      <ul>
+        <li><code>Options -Indexes</code> in the Apache config — kills directory listing</li>
+        <li>Delete <code>.bak</code>, <code>.old</code> and <code>.dist</code> files from the web root, and block those extensions at the server</li>
+        <li>Store configuration files <em>outside</em> the web root entirely, so they can't be requested at all</li>
+        <li><code>ServerTokens Prod</code> and <code>ServerSignature Off</code> — stop advertising the version</li>
+      </ul>
+
+      <!-- 09 -->
+      <h2 id="report"><span class="h2-num">Part 09</span>Turning output into a report</h2>
+
+      <p>
+        Scan output is evidence, and evidence needs saving. Nmap writes to several formats:
+      </p>
+
+      <div class="terminal">
+<span class="prompt-sym">$</span> nmap -sV -p- -oN scan.txt localhost     <span class="cmt"># normal, human-readable</span>
+<span class="prompt-sym">$</span> nmap -sV -oX scan.xml localhost         <span class="cmt"># XML, for tooling</span>
+<span class="prompt-sym">$</span> nmap -sV -oG scan.gnmap localhost       <span class="cmt"># greppable</span>
+<span class="prompt-sym">$</span> nmap -sV -oA scan localhost             <span class="cmt"># all three at once</span>
+      </div>
+
+      <p>
+        <code>-oA</code> is the one to default to. Disk is cheap, and re-running a scan to
+        recover output you didn't save is embarrassing.
+      </p>
+
+      <p>
+        But raw output is not a report. Nobody is going to act on a terminal dump. A finding
+        needs four things, every time:
+      </p>
+
+      <ul>
+        <li><strong>What</strong> — one sentence a manager can understand. "Database credentials are readable by anyone with a browser."</li>
+        <li><strong>Evidence</strong> — the exact command and the exact output. Reproducible or it didn't happen.</li>
+        <li><strong>Impact</strong> — the consequence, in business terms. "An unauthenticated attacker can read, alter or delete the entire database."</li>
+        <li><strong>Remediation</strong> — specific and actionable. Not "improve security" but "set <code>Options -Indexes</code> and remove <code>.bak</code> files from the web root."</li>
+      </ul>
+
+      <p>
+        I wrote the DVWA assessment up this way — executive summary, severity table,
+        methodology, then each finding with those four parts. You can
+        <a href="https://github.com/Nour-salepan/scanning-project/blob/main/DVWA-Security-Assessment.md" target="_blank" rel="noopener">read the full report here</a>,
+        or the <a href="projects.html#dvwa">case study version</a>.
+      </p>
+
+      <div class="pull">
+        Plenty of people can run a scan. Far fewer can explain which line of the output matters and why.
+      </div>
+
+      <!-- 10 -->
+      <h2 id="automate"><span class="h2-num">Part 10</span>Automating the whole thing</h2>
+
+      <p>
+        You'll run this same four-stage sequence against every target forever, which makes it a
+        script. Here's the shape of it:
+      </p>
+
+      <div class="terminal">
+<span class="cmt">#!/bin/bash</span>
+TARGET=$1
+OUT="recon_$TARGET"
+mkdir -p "$OUT"
+
+<span class="cmt"># 1. is it alive?</span>
+nmap -sn "$TARGET" | tee "$OUT/1-discovery.txt"
+
+<span class="cmt"># 2. what's open?</span>
+nmap -p- -T4 "$TARGET" | tee "$OUT/2-ports.txt"
+
+<span class="cmt"># 3. what's running?</span>
+nmap -sV "$TARGET" | tee "$OUT/3-versions.txt"
+
+<span class="cmt"># 4. dig deeper</span>
+nmap -sC "$TARGET" | tee "$OUT/4-scripts.txt"
+
+echo "Done. Results in $OUT/"
+      </div>
+
+      <p>
+        <code>tee</code> is the useful trick there — it prints to your terminal <em>and</em>
+        writes the file, so you watch it live and still keep the evidence.
+      </p>
+
+      <p>
+        My full version adds colour output, input validation and a per-target report folder.
+        Both scripts are on
+        <a href="https://github.com/Nour-salepan/scanning-project" target="_blank" rel="noopener">GitHub</a>
+        — I wrote the plain one from scratch first, deliberately, to be sure I understood every
+        step before letting anything generate it for me. That order matters more than it sounds:
+        if you automate a workflow you don't understand, you can't tell when the output is wrong.
+      </p>
+
+      <!-- 11 -->
+      <h2 id="cheat"><span class="h2-num">Part 11</span>Cheat sheet</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Command</th><th>What it does</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>nmap -sn TARGET</code></td><td>Host discovery only, no ports</td></tr>
+            <tr><td><code>nmap -Pn TARGET</code></td><td>Skip discovery, assume host is up</td></tr>
+            <tr><td><code>nmap -p- TARGET</code></td><td>All 65535 ports</td></tr>
+            <tr><td><code>nmap -p 80,443 TARGET</code></td><td>Specific ports</td></tr>
+            <tr><td><code>nmap --top-ports 100 TARGET</code></td><td>Most common 100 ports</td></tr>
+            <tr><td><code>sudo nmap -sS TARGET</code></td><td>SYN / stealth scan</td></tr>
+            <tr><td><code>nmap -sT TARGET</code></td><td>TCP connect scan, no root needed</td></tr>
+            <tr><td><code>sudo nmap -sU TARGET</code></td><td>UDP scan</td></tr>
+            <tr><td><code>nmap -sV TARGET</code></td><td>Service and version detection</td></tr>
+            <tr><td><code>sudo nmap -O TARGET</code></td><td>OS detection</td></tr>
+            <tr><td><code>nmap -sC TARGET</code></td><td>Default NSE scripts</td></tr>
+            <tr><td><code>nmap --script=vuln TARGET</code></td><td>Vulnerability script category</td></tr>
+            <tr><td><code>sudo nmap -A TARGET</code></td><td>Aggressive: -sV, -O, -sC, traceroute</td></tr>
+            <tr><td><code>nmap -T4 TARGET</code></td><td>Faster timing</td></tr>
+            <tr><td><code>nmap -oA name TARGET</code></td><td>Save output in all three formats</td></tr>
+            <tr><td><code>nmap -v TARGET</code></td><td>Verbose — show progress as it runs</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>A sensible default sequence</h3>
+
+      <div class="terminal">
+<span class="prompt-sym">$</span> nmap -sn 192.168.1.0/24                    <span class="cmt"># 1. what exists</span>
+<span class="prompt-sym">$</span> sudo nmap -sS -p- -T4 -oA ports TARGET      <span class="cmt"># 2. every door</span>
+<span class="prompt-sym">$</span> nmap -sV -sC -p 22,80,8080 -oA deep TARGET  <span class="cmt"># 3. dig into what's open</span>
+      </div>
+
+      <h3>Where to go next</h3>
+
+      <ul>
+        <li><strong>Wireshark</strong> — run a capture while you scan and watch the handshakes happen. Nothing makes <code>-sS</code> versus <code>-sT</code> click faster than seeing the difference on the wire.</li>
+        <li><strong>TryHackMe</strong> — the Nmap room, then Network Services, in an environment that authorises you</li>
+        <li><strong>More DVWA</strong> — you've only done reconnaissance. The app has SQL injection, XSS, file upload and command injection waiting.</li>
+        <li><strong>Write one up</strong> — take any lab, scan it, and produce a one-page report with the four-part structure from Part 09. That artefact is worth more in an interview than a certificate.</li>
+      </ul>
+
+      <p>
+        Nmap isn't hard. It's maybe fifteen flags that matter, and you've now seen all of them in
+        the order you'd actually use them. The skill that takes longer is the one from Part 08 —
+        looking at "directory with listing" and "a <code>.bak</code> file" and seeing that
+        together they're a breach.
+      </p>
+
+      <div class="post-foot">
+        <div class="author-box">
+          <div class="author-avatar">NS</div>
+          <div>
+            <h4>Nour Salepan</h4>
+            <p>
+              Working toward a first cybersecurity role — Nmap, Wireshark, Linux and
+              vulnerability assessment, with an analytics background. Everything I scan is my
+              own lab or explicitly authorised. Based in Somalia, open to remote roles.
+            </p>
+            <div class="card-links">
+              <a href="projects.html#dvwa">The full DVWA assessment →</a>
+              <a href="contact.html">Get in touch →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <a href="blog.html" class="btn btn-outline">← All posts</a>
+          <a href="https://github.com/Nour-salepan/scanning-project" target="_blank" rel="noopener" class="btn btn-primary">The scripts on GitHub ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="container footer-wrap">
+    <span>© 2026 Nour Salepan</span>
+    <span><a href="https://github.com/Nour-salepan" target="_blank" rel="noopener">github.com/Nour-salepan</a></span>
+  </div>
+</footer>
+
+<script src="theme.js"></script>
+<script>
+  window.addEventListener('scroll', function () {
+    var bar = document.getElementById('progressBar');
+    if (!bar) return;
+    var h = document.documentElement;
+    var pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
+  });
+</script>
+</body>
+</html>
