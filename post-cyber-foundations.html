@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity Foundations, Explained Simply — Nour Salepan</title>
+<meta name="description" content="Every core concept from Course 1 of the Google Cybersecurity Certificate — the CIA triad, the eight security domains, how attacks work, and what a security analyst actually does — in plain language.">
+<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="article.css">
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header>
+  <div class="nav-wrap">
+    <a href="index.html" class="logo"><span class="prompt">&gt;</span> nour.salepan</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">menu</button>
+    <nav>
+      <ul id="navList">
+        <li><a href="index.html">home</a></li>
+        <li><a href="projects.html">projects</a></li>
+        <li><a href="skills.html">skills</a></li>
+        <li><a href="experience.html">experience</a></li>
+        <li><a href="blog.html" class="active">blog</a></li>
+        <li><a href="contact.html">contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span class="knob">◐</span></button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <article class="article-wrap">
+
+    <div class="post-head">
+      <div class="eyebrow">foundations</div>
+      <h1>Cybersecurity Foundations, Explained Simply</h1>
+      <p class="post-sub">
+        Everything in Course 1 of the Google Cybersecurity Certificate — the CIA triad, the
+        eight security domains, how attacks actually work, and what a security analyst does
+        all day — written the way I wish someone had explained it to me.
+      </p>
+      <div class="post-meta">
+        <span>By Nour Salepan</span>
+        <span class="sep">·</span>
+        <span>November 2026</span>
+        <span class="sep">·</span>
+        <span>~18 min read</span>
+      </div>
+    </div>
+
+    <nav class="toc">
+      <div class="toc-title">Contents</div>
+      <ol>
+        <li><a href="#what">What cybersecurity actually means</a></li>
+        <li><a href="#cia">The CIA triad — the whole field in three words</a></li>
+        <li><a href="#history">Four attacks that changed everything</a></li>
+        <li><a href="#threats">How attackers actually get in</a></li>
+        <li><a href="#psychology">Why smart people click bad links</a></li>
+        <li><a href="#domains">The eight security domains</a></li>
+        <li><a href="#frameworks">Frameworks and controls</a></li>
+        <li><a href="#job">What a security analyst does all day</a></li>
+        <li><a href="#ethics">Ethics: the part that gets skipped</a></li>
+        <li><a href="#start">Where to actually start</a></li>
+      </ol>
+    </nav>
+
+    <div class="prose">
+
+      <p class="lede">
+        Cybersecurity has a jargon problem. Walk into it cold and you'll meet CIA triads,
+        CISSP domains, NIST frameworks and threat actors inside the first hour — and most
+        explanations assume you already know what they mean.
+      </p>
+
+      <p>
+        I'm working through the Google Cybersecurity Professional Certificate, and this is my
+        write-up of Course 1: <em>Foundations of Cybersecurity</em>. Not a summary of the
+        slides — an attempt to explain each concept the way it finally made sense to me, with
+        the analogies that made it click.
+      </p>
+
+      <p>
+        If you're considering this field, this is roughly the mental model you need before
+        anything technical will land.
+      </p>
+
+      <!-- 01 -->
+      <h2 id="what"><span class="h2-num">Part 01</span>What cybersecurity actually means</h2>
+
+      <p>
+        The textbook definition: cybersecurity is the practice of ensuring confidentiality,
+        integrity and availability of information by protecting networks, devices, people and
+        data from unauthorised access or criminal exploitation.
+      </p>
+
+      <p>That's accurate and almost useless on a first read. Here's the version that helped me.</p>
+
+      <p>
+        <strong>Security is the business of keeping promises about information.</strong> When a
+        hospital stores your medical record, it has implicitly promised three things: that
+        only the right people can read it, that nobody can secretly alter it, and that your
+        doctor can get to it when you're in front of them bleeding. Every security control
+        that exists — firewalls, passwords, backups, encryption, the lot — is a mechanism for
+        keeping one of those three promises.
+      </p>
+
+      <p>
+        Attacks are promise-breaking. A data breach breaks the first. Tampering with records
+        breaks the second. Ransomware breaks the third. Once I saw it this way, the rest of
+        the field stopped feeling like a list of unrelated topics.
+      </p>
+
+      <div class="note">
+        <div class="note-title">Why anyone pays for this</div>
+        <p>
+          Breaches cost money, customers and legal standing. Organisations hire security people
+          for the same reason they hire accountants — not because it's exciting, but because the
+          alternative is catastrophic and the regulators are watching.
+        </p>
+      </div>
+
+      <!-- 02 -->
+      <h2 id="cia"><span class="h2-num">Part 02</span>The CIA triad — the whole field in three words</h2>
+
+      <p>
+        Nothing to do with the intelligence agency. It's the three properties you're defending,
+        and essentially every security decision traces back to one of them.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Property</th><th>The promise</th><th>Broken when…</th><th>Protected by</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Confidentiality</strong></td>
+              <td>Only authorised people can see it</td>
+              <td>Customer records leak online</td>
+              <td>Access controls, encryption, least privilege</td>
+            </tr>
+            <tr>
+              <td><strong>Integrity</strong></td>
+              <td>The data is correct and unaltered</td>
+              <td>An attacker silently edits a bank balance</td>
+              <td>Hashing, checksums, audit logs, version control</td>
+            </tr>
+            <tr>
+              <td><strong>Availability</strong></td>
+              <td>Authorised people can reach it when needed</td>
+              <td>Ransomware locks every file</td>
+              <td>Backups, redundancy, DDoS protection</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        The part that makes this genuinely useful rather than a poster on a wall: <strong>the
+        three pull against each other.</strong> Maximum confidentiality means nobody can read
+        anything, which destroys availability. Maximum availability means no barriers at all,
+        which destroys confidentiality. Security work is permanently a negotiation between
+        them, and the right balance depends entirely on what you're protecting.
+      </p>
+
+      <p>
+        A public train timetable is nearly all availability — who cares who reads it, but it
+        had better be reachable and correct. A list of undercover informants is nearly all
+        confidentiality — better unreachable than leaked. Same framework, opposite settings.
+      </p>
+
+      <div class="pull">
+        If someone proposes a control, ask which letter it protects and which letter it costs.
+      </div>
+
+      <!-- 03 -->
+      <h2 id="history"><span class="h2-num">Part 03</span>Four attacks that changed everything</h2>
+
+      <p>
+        The history isn't trivia. Each of these forced a permanent change in how systems get
+        built, and you can still see their fingerprints in today's defaults.
+      </p>
+
+      <div class="hist">
+        <div class="hist-item">
+          <div class="hist-year">1986</div>
+          <h4>The Brain virus</h4>
+          <p>Written by two brothers in Pakistan to track piracy of their medical software, it spread worldwide via floppy disks — far beyond anything intended. It wasn't destructive, but it proved code could propagate between machines on its own. <strong>Lesson: intent doesn't limit blast radius.</strong></p>
+        </div>
+        <div class="hist-item">
+          <div class="hist-year">1988</div>
+          <h4>The Morris worm</h4>
+          <p>A graduate student's experiment to measure the size of the internet. A flaw in its logic meant it reinfected machines repeatedly until they collapsed under the load, taking down a significant share of the early internet. It led directly to the creation of coordinated incident response teams (CERTs). <strong>Lesson: availability is a security property, and bugs in your own tools are a threat.</strong></p>
+        </div>
+        <div class="hist-item">
+          <div class="hist-year">2000</div>
+          <h4>LoveLetter (ILOVEYOU)</h4>
+          <p>An email with the subject "I love you" and an attachment. Opening it stole credentials and mailed itself to the victim's entire address book. It hit tens of millions of machines. This is the moment the industry really understood <strong>social engineering</strong> — the attack didn't break a system, it persuaded a person.</p>
+        </div>
+        <div class="hist-item">
+          <div class="hist-year">2017</div>
+          <h4>The Equifax breach</h4>
+          <p>Roughly 147 million people's personal and financial data exposed, through a <em>known</em> vulnerability that had a patch available and wasn't applied. <strong>Lesson: most real breaches aren't exotic. They're basic hygiene that someone didn't do.</strong></p>
+        </div>
+      </div>
+
+      <div class="takeaway">
+        <div class="note-title">The pattern</div>
+        <p>
+          Two of those four were enabled by human behaviour, and one by an unapplied patch. The
+          glamorous image of security — a genius defeating cryptography — is almost never what
+          actually happens. The boring controls are the ones that matter.
+        </p>
+      </div>
+
+      <!-- 04 -->
+      <h2 id="threats"><span class="h2-num">Part 04</span>How attackers actually get in</h2>
+
+      <p>
+        A few terms first, because they get used interchangeably and shouldn't be.
+      </p>
+
+      <ul>
+        <li><strong>Threat</strong> — anything that could cause harm. A flood is a threat.</li>
+        <li><strong>Vulnerability</strong> — a weakness that a threat could exploit. A building with no flood barriers.</li>
+        <li><strong>Risk</strong> — the combination: how likely, and how bad. A flood threat plus no barriers equals high risk; the same threat in a desert is low risk.</li>
+        <li><strong>Attack surface</strong> — every possible way in. More doors means more to defend, which is why "reduce the attack surface" is a constant refrain.</li>
+      </ul>
+
+      <h3>Social engineering</h3>
+
+      <p>
+        Manipulating people rather than machines. It remains the most reliable way in, because
+        people are patchable only through training and training expires.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Type</th><th>What it is</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Phishing</strong></td><td>Mass fraudulent emails hoping someone bites</td></tr>
+            <tr><td><strong>Spear phishing</strong></td><td>Targeted at a specific person, using real details about them</td></tr>
+            <tr><td><strong>Whaling</strong></td><td>Spear phishing aimed at executives, who approve large payments</td></tr>
+            <tr><td><strong>Vishing / smishing</strong></td><td>The same thing by voice call or SMS</td></tr>
+            <tr><td><strong>Business email compromise</strong></td><td>Impersonating a trusted colleague or supplier to trigger a transfer</td></tr>
+            <tr><td><strong>Watering hole</strong></td><td>Compromising a site the target group already visits, and waiting</td></tr>
+            <tr><td><strong>USB baiting</strong></td><td>Leaving infected drives where curious people will find and plug them in</td></tr>
+            <tr><td><strong>Tailgating</strong></td><td>Walking in behind someone who badged through a door</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Malware</h3>
+
+      <ul>
+        <li><strong>Virus</strong> — attaches to a file and needs a human to run it</li>
+        <li><strong>Worm</strong> — spreads by itself across a network, no human required (the Morris worm)</li>
+        <li><strong>Ransomware</strong> — encrypts your files and demands payment; an attack on availability</li>
+        <li><strong>Spyware</strong> — hides and quietly collects information; an attack on confidentiality</li>
+        <li><strong>Trojan</strong> — disguised as something legitimate so you install it yourself</li>
+      </ul>
+
+      <h3>Web-based attacks</h3>
+
+      <p>
+        <strong>SQL injection</strong> — feeding database commands into an input box that expected
+        a name, because the application pastes your text straight into a query. <strong>Cross-site
+        scripting (XSS)</strong> — getting your malicious script stored on a site so it runs in
+        other visitors' browsers. Both come from the same root cause: <em>trusting input you
+        didn't generate.</em>
+      </p>
+
+      <div class="note warn">
+        <div class="note-title">From my own lab</div>
+        <p>
+          In the DVWA assessment I ran, the critical finding wasn't an injection or an exploit.
+          It was a directory listing left enabled plus a <code>config.inc.php.bak</code> file
+          nobody deleted. Because the server won't execute <code>.bak</code> as PHP, it served
+          the source as plain text — database username and password included, to anyone with a
+          browser. Two boring misconfigurations, chained, equals full database access.
+        </p>
+      </div>
+
+      <!-- 05 -->
+      <h2 id="psychology"><span class="h2-num">Part 05</span>Why smart people click bad links</h2>
+
+      <p>
+        The most useful thing in Course 1, to my mind. Social engineering works by exploiting
+        specific psychological levers, and once you can name them you start noticing them in
+        your own inbox.
+      </p>
+
+      <ul>
+        <li><strong>Authority</strong> — the message appears to come from your CEO, the tax office, IT support. We're trained to comply with authority quickly.</li>
+        <li><strong>Urgency</strong> — "your account will be closed in 24 hours." Panic suppresses careful thinking, which is the entire point.</li>
+        <li><strong>Intimidation</strong> — mild threats of consequences: a fine, a suspension, trouble with your manager.</li>
+        <li><strong>Social proof</strong> — "everyone on your team has already completed this."</li>
+        <li><strong>Scarcity</strong> — a limited offer, a last chance, only three left.</li>
+        <li><strong>Familiarity</strong> — the attacker has done homework and mentions your actual colleagues or recent projects.</li>
+        <li><strong>Trust</strong> — a rapport built over several harmless messages before the real ask arrives.</li>
+      </ul>
+
+      <div class="takeaway">
+        <div class="note-title">The one habit worth building</div>
+        <p>
+          Notice when a message is making you feel <em>rushed</em>. That feeling is the attack.
+          Legitimate organisations are generally fine with you taking ten minutes to verify
+          through a channel you chose yourself — a phone number you looked up, not the one in
+          the email. Urgency is the single most common ingredient, and slowing down defeats
+          most of it.
+        </p>
+      </div>
+
+      <!-- 06 -->
+      <h2 id="domains"><span class="h2-num">Part 06</span>The eight security domains</h2>
+
+      <p>
+        Security is wide. These eight domains (from the CISSP framework) are how the field
+        divides itself up — useful mainly for working out which part you want to live in.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>#</th><th>Domain</th><th>In plain terms</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td><strong>Security &amp; Risk Management</strong></td><td>Policies, compliance, deciding which risks are worth accepting</td></tr>
+            <tr><td>2</td><td><strong>Asset Security</strong></td><td>Knowing what you own and classifying how sensitive it is</td></tr>
+            <tr><td>3</td><td><strong>Security Architecture &amp; Engineering</strong></td><td>Designing systems that are secure by construction</td></tr>
+            <tr><td>4</td><td><strong>Communication &amp; Network Security</strong></td><td>Securing data in transit — firewalls, VPNs, segmentation</td></tr>
+            <tr><td>5</td><td><strong>Identity &amp; Access Management</strong></td><td>Who are you, and what exactly are you allowed to touch</td></tr>
+            <tr><td>6</td><td><strong>Security Assessment &amp; Testing</strong></td><td>Audits, vulnerability scanning, penetration testing</td></tr>
+            <tr><td>7</td><td><strong>Security Operations</strong></td><td>Day-to-day monitoring, detection, incident response — the SOC</td></tr>
+            <tr><td>8</td><td><strong>Software Development Security</strong></td><td>Building security into code rather than bolting it on</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Most entry-level analyst roles sit in <strong>domain 7</strong>, with a foot in domain 6.
+        My own lab work — scanning, enumerating, assessing, reporting — is squarely domain 6.
+      </p>
+
+      <!-- 07 -->
+      <h2 id="frameworks"><span class="h2-num">Part 07</span>Frameworks and controls</h2>
+
+      <p>
+        A <strong>framework</strong> is the plan; <strong>controls</strong> are the specific
+        things you implement. Framework says "protect sensitive data"; a control is "enforce
+        multi-factor authentication."
+      </p>
+
+      <h3>The NIST Cybersecurity Framework</h3>
+
+      <p>Five functions, and they double as a decent mental checklist for any system:</p>
+
+      <div class="flow">
+        <div class="flow-step"><span class="flow-num">01</span><h4>Identify</h4><p>what you have</p></div>
+        <div class="flow-step"><span class="flow-num">02</span><h4>Protect</h4><p>put up defences</p></div>
+        <div class="flow-step"><span class="flow-num">03</span><h4>Detect</h4><p>notice trouble</p></div>
+        <div class="flow-step"><span class="flow-num">04</span><h4>Respond</h4><p>contain it</p></div>
+      </div>
+
+      <p style="margin-top: -8px;">
+        …followed by <strong>Recover</strong> — restoring normal operations and learning from it.
+        The order matters: you cannot protect what you haven't identified, and most organisations
+        are weakest at <em>Detect</em>, which is precisely why SOC analysts get hired.
+      </p>
+
+      <h3>Three control types</h3>
+
+      <ul>
+        <li><strong>Administrative</strong> — policies, training, procedures (people)</li>
+        <li><strong>Technical</strong> — firewalls, encryption, MFA (technology)</li>
+        <li><strong>Physical</strong> — locks, badges, cameras (the building)</li>
+      </ul>
+
+      <h3>Principles worth memorising</h3>
+
+      <ul>
+        <li><strong>Least privilege</strong> — give the minimum access needed to do the job, and no more. If an intern's account is compromised, it should unlock very little.</li>
+        <li><strong>Defense in depth</strong> — layers, so one failure isn't total failure. A castle has a moat, walls, <em>and</em> guards.</li>
+        <li><strong>Separation of duties</strong> — no single person can complete a sensitive action alone. The person who requests a payment shouldn't approve it. (Accountants have known this one for centuries.)</li>
+        <li><strong>Minimise the attack surface</strong> — every feature, port and account you don't need is one you also have to defend.</li>
+        <li><strong>Keep security simple</strong> — complexity creates gaps nobody notices.</li>
+      </ul>
+
+      <!-- 08 -->
+      <h2 id="job"><span class="h2-num">Part 08</span>What a security analyst does all day</h2>
+
+      <p>
+        Less dramatic than the films, and more interesting than it sounds. An entry-level
+        analyst typically:
+      </p>
+
+      <ul>
+        <li><strong>Monitors</strong> systems and alerts for anything abnormal</li>
+        <li><strong>Triages</strong> those alerts — the core skill, and mostly a matter of deciding what's a real threat versus noise</li>
+        <li><strong>Investigates</strong> the ones that survive triage, gathering evidence before escalating</li>
+        <li><strong>Follows playbooks</strong> — documented procedures for handling a given incident type</li>
+        <li><strong>Supports audits</strong> and checks that controls are actually working</li>
+        <li><strong>Documents everything</strong>, because an incident with no record can't be learned from</li>
+      </ul>
+
+      <h3>The tools</h3>
+
+      <ul>
+        <li><strong>SIEM</strong> (Splunk, Chronicle) — aggregates logs from everywhere so you can search them in one place and get alerted on patterns</li>
+        <li><strong>IDS/IPS</strong> — intrusion detection and prevention; one warns, the other blocks</li>
+        <li><strong>Packet analysers</strong> (Wireshark, tcpdump) — read the actual traffic on the wire</li>
+        <li><strong>Network scanners</strong> (Nmap) — discover what's running and exposed</li>
+        <li><strong>Linux, SQL and Python</strong> — the connective tissue: navigating systems, querying logs, automating the repetitive parts</li>
+      </ul>
+
+      <div class="note good">
+        <div class="note-title">Why I think I can do this</div>
+        <p>
+          Alert triage is pattern recognition against a baseline — deciding which anomaly is real.
+          I did the same thing with data for two years. In one audit I flagged an 89.7x
+          return-on-spend figure as implausible against a 2.5–4.7x peer range; it turned out to be
+          a units error that had inflated the headline number by 73%. The instinct that says
+          <em>"that's too good, something's broken"</em> is the same instinct a SOC needs. The
+          domain is new to me. The reflex isn't.
+        </p>
+      </div>
+
+      <!-- 09 -->
+      <h2 id="ethics"><span class="h2-num">Part 09</span>Ethics: the part that gets skipped</h2>
+
+      <p>
+        Security people are handed access that would be criminal in other hands. The
+        distinction between a security professional and an attacker is not skill — it's
+        authorisation.
+      </p>
+
+      <ul>
+        <li><strong>Confidentiality</strong> — you'll see data you have no business discussing. Don't.</li>
+        <li><strong>Privacy</strong> — access granted for one purpose isn't permission for another. Being able to read something is not permission to read it.</li>
+        <li><strong>Law</strong> — scanning or testing systems without written permission is a crime in most countries, regardless of intent or whether you caused harm.</li>
+      </ul>
+
+      <p>
+        This is why every project on this site states its scope explicitly. My Nmap work runs
+        against my own machine, <code>scanme.nmap.org</code> (which exists for exactly this
+        purpose), and platforms like TryHackMe that authorise it. That boundary isn't a
+        formality — a habit of testing "just to see" is how promising careers end before they
+        start.
+      </p>
+
+      <div class="pull">
+        The only thing separating a penetration tester from a criminal is a signed piece of paper.
+      </div>
+
+      <!-- 10 -->
+      <h2 id="start"><span class="h2-num">Part 10</span>Where to actually start</h2>
+
+      <p>If this is where you are now, here's the order I'd suggest — and am following myself.</p>
+
+      <div class="phase">
+        <div class="phase-time">Weeks 1–4</div>
+        <div>
+          <h4>Concepts before tools</h4>
+          <p>The material in this post. You can't interpret a scan result without knowing what ports and protocols are.</p>
+          <ul>
+            <li>Google Cybersecurity Certificate Course 1, or any solid free intro</li>
+            <li>Networking basics: IP addresses, ports, TCP/IP, the three-way handshake</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-time">Weeks 5–10</div>
+        <div>
+          <h4>Linux and the command line</h4>
+          <p>Almost every security tool assumes it. Get comfortable before you need it under pressure.</p>
+          <ul>
+            <li>Navigation, permissions, processes, grep and piping</li>
+            <li>Enough Bash to automate a repeated sequence of commands</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-time">Weeks 11–16</div>
+        <div>
+          <h4>Hands-on tools in a lab you own</h4>
+          <p>Where it stops being theory. Build the lab first, then break it.</p>
+          <ul>
+            <li>Nmap against <code>scanme.nmap.org</code> and your own machines</li>
+            <li>Wireshark — capture your own traffic and read it</li>
+            <li>A deliberately vulnerable app (DVWA) running locally</li>
+            <li>TryHackMe for guided, authorised practice</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-time">Ongoing</div>
+        <div>
+          <h4>Write everything up</h4>
+          <p>The single highest-leverage habit, and the one most beginners skip.</p>
+          <ul>
+            <li>Turn each lab into a short report: methodology, findings, severity, remediation</li>
+            <li>Publish them — a written assessment proves more than a certificate does</li>
+          </ul>
+        </div>
+      </div>
+
+      <p>
+        That last point is the one I'd argue hardest for. Plenty of people can run a scan.
+        Far fewer can explain what the output means, decide which finding matters most, and
+        write it down so a manager can act on it. That gap is where you become employable.
+      </p>
+
+      <h3>The honest summary</h3>
+
+      <p>
+        Nothing in Course 1 makes you a security professional. What it does is give you the
+        vocabulary and the mental model, so that when you finally run a scan the output means
+        something instead of looking like noise.
+      </p>
+
+      <p>
+        The field is far less about exotic hacking than it looks from outside. It's mostly
+        about promises — confidentiality, integrity, availability — and the unglamorous,
+        repetitive discipline of keeping them. The Equifax breach happened because of an
+        unapplied patch. Most of them do.
+      </p>
+
+      <div class="post-foot">
+        <div class="author-box">
+          <div class="author-avatar">NS</div>
+          <div>
+            <h4>Nour Salepan</h4>
+            <p>
+              Working toward a first cybersecurity role — Nmap, Wireshark, Linux and
+              vulnerability assessment, with an analytics background and a habit of distrusting
+              numbers that look too good. Based in Somalia, open to remote roles.
+            </p>
+            <div class="card-links">
+              <a href="projects.html">See my lab work →</a>
+              <a href="contact.html">Get in touch →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <a href="blog.html" class="btn btn-outline">← All posts</a>
+          <a href="projects.html" class="btn btn-primary">View my work</a>
+        </div>
+      </div>
+
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="container footer-wrap">
+    <span>© 2026 Nour Salepan</span>
+    <span><a href="https://github.com/Nour-salepan" target="_blank" rel="noopener">github.com/Nour-salepan</a></span>
+  </div>
+</footer>
+
+<script src="theme.js"></script>
+<script>
+  window.addEventListener('scroll', function () {
+    var bar = document.getElementById('progressBar');
+    if (!bar) return;
+    var h = document.documentElement;
+    var pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
+  });
+</script>
+</body>
+</html>

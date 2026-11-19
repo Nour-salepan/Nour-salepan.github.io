@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projects — Nour Salepan</title>
+<meta name="description" content="Cybersecurity lab work: Nmap reconnaissance toolkit and a full DVWA vulnerability assessment with findings and remediation.">
 <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -34,162 +35,292 @@
     <div class="container">
       <div class="eyebrow">portfolio</div>
       <h1>Projects</h1>
-      <p class="lead">Real datasets, real defects caught, real write-ups — no tutorial follow-alongs.</p>
+      <p class="lead">
+        Hands-on security work in labs I own or am explicitly authorised to test. Real tools,
+        real findings, written up the way an engagement would be.
+      </p>
     </div>
   </section>
 
   <section>
     <div class="container">
 
-      <!-- ===== Marketing Campaign Performance ===== -->
-      <div class="case-study" id="marketing">
+      <!-- ===== DVWA Security Assessment ===== -->
+      <div class="case-study" id="dvwa">
         <div class="case-header">
           <div>
-            <h3>Marketing Campaign Performance Analysis</h3>
-            <div class="case-meta">Excel · 2026 · Self-directed portfolio project · Jan–Jun 2026 dataset</div>
+            <h3>DVWA Security Assessment</h3>
+            <div class="case-meta">Vulnerability Assessment · Nmap + NSE · November 2026 · Authorised local lab</div>
           </div>
           <span class="status">complete</span>
         </div>
 
         <p>
-          Cleaned and audited a deliberately messy 798-record, 6-channel ad performance
-          dataset end to end, then caught a data-quality defect that was materially
-          distorting the headline numbers.
+          A full reconnaissance and configuration review of a Damn Vulnerable Web Application
+          instance running on my own machine, documented as a formal security assessment
+          report. The headline finding was a realistic breach chain: an enabled directory
+          listing plus a leftover backup file together exposed live database credentials in
+          plain text.
         </p>
 
         <div class="metrics-grid">
           <div class="metric-box">
-            <span class="metric-num">798 → 780</span>
-            <span class="metric-label">rows after dedup</span>
+            <span class="metric-num">3</span>
+            <span class="metric-label">findings documented</span>
           </div>
           <div class="metric-box">
-            <span class="metric-num">103</span>
-            <span class="metric-label">blank cells treated</span>
+            <span class="metric-num">1</span>
+            <span class="metric-label">rated critical</span>
           </div>
           <div class="metric-box">
-            <span class="metric-num">89.7x</span>
-            <span class="metric-label">anomalous ROAS flagged</span>
+            <span class="metric-num">6</span>
+            <span class="metric-label">step methodology</span>
           </div>
           <div class="metric-box">
-            <span class="metric-num">33%</span>
-            <span class="metric-label">campaigns below target</span>
-          </div>
-        </div>
-
-        <div class="case-section-title">Data Cleaning</div>
-        <ul class="finding-list">
-          <li>Removed <strong>18 duplicate CampaignIDs</strong>; any analysis on the raw file would have double-counted them.</li>
-          <li>Consolidated <strong>30 spelling/casing variants</strong> of Channel into 6 real channels, and <strong>21 Manager variants</strong> into 5 — "TikTok" alone appeared under four different spellings.</li>
-          <li>Treated <strong>103 blank cells</strong> across 5 columns via channel-average imputation or explicit "Unknown" labelling, documenting the choice per column.</li>
-          <li>Normalized a <code>Date</code> column mixing four formats, and converted <code>Spend</code> values stored as text ("$185.70") into numeric fields.</li>
-        </ul>
-
-        <div class="callout">
-          <strong>Key finding —</strong> Email showed $2.81M revenue on just $31.4K spend: an
-          89.7x ROAS versus 2.5–4.7x everywhere else, and 45% of all revenue from only 3% of
-          spend. Flagged as a units error in the source data rather than a genuine result.
-          Excluding it corrected blended ROAS from <strong>6.4x down to 3.7x</strong> on $938.8K
-          of real spend.
-        </div>
-
-        <div class="case-section-title">Budget Efficiency</div>
-        <ul class="finding-list">
-          <li>Google Ads absorbs <strong>$345.5K — 36% of total spend</strong>, more than any other channel, but returns only 3.64x against a 4.0x target, with 53 campaigns Below Target.</li>
-          <li>LinkedIn is less efficient (2.46x vs. a 2.5x target, 62 campaigns Below Target) but carries far less budget ($201.8K) — making Google Ads the highest-dollar rebalancing opportunity.</li>
-          <li><strong>257 of 780 campaigns (33%)</strong> miss their channel benchmark, concentrated in LinkedIn, TikTok, and Google Ads. Facebook is the healthiest paid channel at 4.67x against a 3.5x target.</li>
-          <li>Revenue peaked in <strong>May 2026 at $1.35M</strong>, 56% above the January low; conversion rates barely move across audience segments (5.2–5.6%), so channel and timing — not targeting — drive the variance.</li>
-        </ul>
-
-        <div class="case-section-title">Methodology</div>
-        <p style="font-size: 0.92rem;">
-          Built entirely in Excel: PivotTables and PivotCharts, an INDEX/MATCH benchmark
-          lookup table, IFS-based performance classification (Above/On/Below Target), and
-          independent SUMIFS/COUNTIFS/AVERAGEIFS cross-checks to validate every figure two
-          ways before it went into the write-up.
-        </p>
-
-        <div class="tag-list" style="margin-top: 18px;">
-          <span class="tag-chip">Excel</span>
-          <span class="tag-chip">PivotTables</span>
-          <span class="tag-chip">INDEX/MATCH</span>
-          <span class="tag-chip">IFS Logic</span>
-          <span class="tag-chip">SUMIFS/COUNTIFS/AVERAGEIFS</span>
-          <span class="tag-chip">Data Auditing</span>
-        </div>
-
-        <div class="card-links">
-          <a href="https://github.com/Nour-salepan/data-analyst-portfolio" target="_blank" rel="noopener">Repo ↗</a>
-          <a href="https://github.com/Nour-salepan/data-analyst-portfolio/tree/main/2026-08-06_marketing-campaigns" target="_blank" rel="noopener">Project Folder ↗</a>
-          <a href="https://raw.githubusercontent.com/Nour-salepan/data-analyst-portfolio/main/2026-08-06_marketing-campaigns/insights.md" target="_blank" rel="noopener">Insights Write-up ↗</a>
-        </div>
-      </div>
-
-      <!-- ===== Car Price Analysis ===== -->
-      <div class="case-study" id="car-price">
-        <div class="case-header">
-          <div>
-            <h3>Car Price Analysis</h3>
-            <div class="case-meta">SQL · PostgreSQL · 2026 · Self-directed portfolio project</div>
-          </div>
-          <span class="status">complete</span>
-        </div>
-
-        <p>
-          First SQL project: designed the schema and wrote 13 progressively advanced queries
-          against a 10-field public vehicle-listings dataset, completing the full set within
-          a self-imposed one-hour challenge.
-        </p>
-
-        <div class="metrics-grid">
-          <div class="metric-box">
-            <span class="metric-num">13</span>
-            <span class="metric-label">SQL queries</span>
-          </div>
-          <div class="metric-box">
-            <span class="metric-num">10</span>
-            <span class="metric-label">dataset fields</span>
-          </div>
-          <div class="metric-box">
-            <span class="metric-num">1 hr</span>
-            <span class="metric-label">self-imposed challenge</span>
-          </div>
-          <div class="metric-box">
-            <span class="metric-num">4</span>
-            <span class="metric-label">price drivers isolated</span>
+            <span class="metric-num">8080</span>
+            <span class="metric-label">sole open port found</span>
           </div>
         </div>
 
         <div class="case-section-title">Methodology</div>
-        <ul class="finding-list">
-          <li>Ran explicit <strong>null-count and duplicate-detection checks</strong> across all key fields before writing any analysis query.</li>
-          <li>Applied <strong>CTEs, window functions</strong> (<code>RANK() OVER</code>, <code>PARTITION BY</code>), and correlated subqueries to move from basic aggregation to brand-level price statistics.</li>
-          <li>Used <strong>CASE-based banding</strong> to segment pricing by engine-size range (0–2.0L, 2.0–3.0L, 3.0–4.0L, 4.0L+).</li>
-        </ul>
+        <div class="terminal">
+<span class="cmt"># 1. host discovery</span>
+<span class="prompt-sym">$</span> nmap -sn localhost
+<span class="cmt"># 2. full port scan</span>
+<span class="prompt-sym">$</span> nmap -p- localhost
+<span class="cmt"># 3. service / version detection</span>
+<span class="prompt-sym">$</span> nmap -sV -p 8080 localhost
+<span class="cmt"># 4. OS detection</span>
+<span class="prompt-sym">$</span> sudo nmap -O localhost
+<span class="cmt"># 5. NSE enumeration</span>
+<span class="prompt-sym">$</span> nmap --script=http-enum,http-headers,http-methods -p 8080 localhost
+<span class="cmt"># 6. manual verification in a browser</span>
+        </div>
+
+        <div class="case-section-title">Target profile</div>
+        <div class="table-wrap" style="overflow-x:auto; margin-bottom: 26px; border: 1px solid var(--border); border-radius: 12px;">
+          <table style="width:100%; border-collapse: collapse; font-size: 0.9rem;">
+            <tbody>
+              <tr><td style="padding:12px 16px; border-bottom:1px solid var(--border); color: var(--text-faint); font-family: var(--mono); font-size:0.8rem;">OPEN PORT</td><td style="padding:12px 16px; border-bottom:1px solid var(--border); color: var(--text);">8080/tcp (http)</td></tr>
+              <tr><td style="padding:12px 16px; border-bottom:1px solid var(--border); color: var(--text-faint); font-family: var(--mono); font-size:0.8rem;">WEB SERVER</td><td style="padding:12px 16px; border-bottom:1px solid var(--border); color: var(--text);">Apache/2.4.25 (Debian)</td></tr>
+              <tr><td style="padding:12px 16px; border-bottom:1px solid var(--border); color: var(--text-faint); font-family: var(--mono); font-size:0.8rem;">OS</td><td style="padding:12px 16px; border-bottom:1px solid var(--border); color: var(--text);">Linux (Debian)</td></tr>
+              <tr><td style="padding:12px 16px; border-bottom:1px solid var(--border); color: var(--text-faint); font-family: var(--mono); font-size:0.8rem;">APPLICATION</td><td style="padding:12px 16px; border-bottom:1px solid var(--border); color: var(--text);">DVWA v1.10 (PHP)</td></tr>
+              <tr><td style="padding:12px 16px; color: var(--text-faint); font-family: var(--mono); font-size:0.8rem;">HTTP METHODS</td><td style="padding:12px 16px; color: var(--text);">GET, HEAD, POST, OPTIONS — no PUT/DELETE</td></tr>
+            </tbody>
+          </table>
+        </div>
 
         <div class="case-section-title">Findings</div>
-        <p style="font-size: 0.92rem;">
-          Isolated <strong>brand tier, mileage, model year, and engine size</strong> as the
-          primary price drivers — luxury brands command the highest average prices, mileage
-          strongly affects used-vehicle pricing, and newer model years consistently price
-          higher. Full methodology documented in the public README.
-        </p>
+
+        <div class="finding-row">
+          <span class="sev sev-crit">CRITICAL</span>
+          <div class="f-text">
+            <strong>Database credentials exposed via directory listing.</strong>
+            Directory listing was enabled on <code>/config/</code>, allowing a browser to reach
+            <code>config.inc.php.bak</code>. Because the server doesn't execute <code>.bak</code>
+            as PHP, it served the file as plain text — revealing the database username, password
+            and schema to an unauthenticated visitor.
+            <br><em style="color: var(--text-faint); font-size: 0.88rem;">Remediation: disable directory listing (<code>Options -Indexes</code>), remove backup files from the web root, store config outside the web root.</em>
+          </div>
+        </div>
+
+        <div class="finding-row">
+          <span class="sev sev-high">HIGH</span>
+          <div class="f-text">
+            <strong>Backup and template files left on the server.</strong>
+            <code>/config/</code> also contained <code>config.inc.php.dist</code>. Any extension
+            the server won't execute gets served as source, exposing code and secrets the live
+            <code>.php</code> file would hide.
+            <br><em style="color: var(--text-faint); font-size: 0.88rem;">Remediation: remove <code>.bak</code>/<code>.old</code>/<code>.dist</code> files; block those extensions at the web server.</em>
+          </div>
+        </div>
+
+        <div class="finding-row">
+          <span class="sev sev-med">MEDIUM</span>
+          <div class="f-text">
+            <strong>Web server version disclosure.</strong>
+            HTTP headers returned the exact version (<code>Apache/2.4.25 (Debian)</code>),
+            shortcutting an attacker's search for version-specific CVEs.
+            <br><em style="color: var(--text-faint); font-size: 0.88rem;">Remediation: <code>ServerTokens Prod</code> and <code>ServerSignature Off</code>.</em>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top: 24px;">
+          <strong>Why this one matters —</strong> neither the directory listing nor the backup
+          file is dramatic on its own. Chained, they hand over the database. Most real breaches
+          look like this: a sequence of small misconfigurations, not a single exotic exploit.
+        </div>
+
+        <div class="note" style="border-left: 3px solid var(--accent-4); background: color-mix(in srgb, var(--accent-4) 7%, transparent); border-radius: 0 10px 10px 0; padding: 16px 20px; margin: 22px 0; font-size: 0.92rem;">
+          <div class="note-title" style="color: var(--accent-4); font-family: var(--mono); font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px;">Scope &amp; ethics</div>
+          <p style="margin:0; color: var(--text-dim);">
+            Performed entirely against a deliberately vulnerable application running on my own
+            machine. No third-party systems were scanned at any point.
+          </p>
+        </div>
 
         <div class="tag-list" style="margin-top: 18px;">
-          <span class="tag-chip">PostgreSQL</span>
-          <span class="tag-chip">pgAdmin</span>
-          <span class="tag-chip">CTEs</span>
-          <span class="tag-chip">Window Functions</span>
-          <span class="tag-chip">Data Cleaning</span>
+          <span class="tag-chip">Nmap</span>
+          <span class="tag-chip">NSE</span>
+          <span class="tag-chip">Vulnerability Assessment</span>
+          <span class="tag-chip">Apache</span>
+          <span class="tag-chip">Security Reporting</span>
         </div>
 
         <div class="card-links">
-          <a href="https://github.com/Nour-salepan/Car-Price-Analysis" target="_blank" rel="noopener">Repo ↗</a>
-          <a href="https://github.com/Nour-salepan/Car-Price-Analysis/blob/main/readme.md" target="_blank" rel="noopener">README ↗</a>
-          <a href="https://github.com/Nour-salepan/Car-Price-Analysis/blob/main/queries.sql" target="_blank" rel="noopener">Queries ↗</a>
+          <a href="https://github.com/Nour-salepan/scanning-project/blob/main/DVWA-Security-Assessment.md" target="_blank" rel="noopener">Full Report ↗</a>
+          <a href="https://github.com/Nour-salepan/scanning-project" target="_blank" rel="noopener">Repo ↗</a>
         </div>
       </div>
 
-      <div style="margin-top: 8px;">
+      <!-- ===== Nmap Recon Toolkit ===== -->
+      <div class="case-study" id="nmap">
+        <div class="case-header">
+          <div>
+            <h3>Nmap Reconnaissance Toolkit</h3>
+            <div class="case-meta">Bash · Nmap · November 2026 · Self-directed project</div>
+          </div>
+          <span class="status">complete</span>
+        </div>
+
+        <p>
+          A command-line toolkit that automates the standard reconnaissance workflow and saves
+          the output of each stage. I wrote two versions deliberately: a plain one built
+          entirely from scratch to prove I understood the steps, and an improved one with
+          colour output and per-target report folders.
+        </p>
+
+        <div class="case-section-title">The workflow it automates</div>
+        <div class="flow">
+          <div class="flow-step">
+            <span class="flow-num">01</span>
+            <h4>Host discovery</h4>
+            <p>nmap -sn</p>
+          </div>
+          <div class="flow-step">
+            <span class="flow-num">02</span>
+            <h4>Port scan</h4>
+            <p>nmap -p-</p>
+          </div>
+          <div class="flow-step">
+            <span class="flow-num">03</span>
+            <h4>Service versions</h4>
+            <p>nmap -sV</p>
+          </div>
+          <div class="flow-step">
+            <span class="flow-num">04</span>
+            <h4>NSE scripts</h4>
+            <p>nmap -sC</p>
+          </div>
+        </div>
+
+        <div class="case-section-title">Sample output</div>
+        <div class="terminal">
+<span class="prompt-sym">$</span> ./recon.sh scanme.nmap.org
+
+PORT      SERVICE    VERSION
+21/tcp    ftp        tcpwrapped
+22/tcp    ssh        OpenSSH 6.6.1p1 Ubuntu
+80/tcp    http       Apache httpd 2.4.7 (Ubuntu)
+9929/tcp  nping-echo Nping echo
+
+<span class="cmt"># each stage saved to recon_&lt;target&gt;/</span>
+        </div>
+
+        <div class="case-section-title">What I learned building it</div>
+        <ul class="finding-list">
+          <li>How IP addresses, ports and subnets actually fit together</li>
+          <li>The TCP three-way handshake — <strong>SYN → SYN-ACK → ACK</strong> — and why it's the thing scans manipulate</li>
+          <li>The difference between a connect scan (<code>-sT</code>) and a stealth/SYN scan (<code>-sS</code>), and when each is appropriate</li>
+          <li>Service version detection (<code>-sV</code>) and OS fingerprinting (<code>-O</code>)</li>
+          <li>Using the Nmap Scripting Engine for deeper enumeration than a port list</li>
+        </ul>
+
+        <div class="note" style="border-left: 3px solid var(--accent-4); background: color-mix(in srgb, var(--accent-4) 7%, transparent); border-radius: 0 10px 10px 0; padding: 16px 20px; margin: 22px 0; font-size: 0.92rem;">
+          <div class="note-title" style="color: var(--accent-4); font-family: var(--mono); font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px;">Honest attribution</div>
+          <p style="margin:0; color: var(--text-dim);">
+            <code>recon-simple.sh</code> is entirely my own. In <code>recon.sh</code> I used an AI
+            assistant for the colour-formatting code; the scanning logic and testing are mine.
+            Targets are limited to my own lab, <code>scanme.nmap.org</code>, and authorised
+            platforms like TryHackMe.
+          </p>
+        </div>
+
+        <div class="tag-list" style="margin-top: 18px;">
+          <span class="tag-chip">Bash</span>
+          <span class="tag-chip">Nmap</span>
+          <span class="tag-chip">Linux</span>
+          <span class="tag-chip">Network Recon</span>
+          <span class="tag-chip">Automation</span>
+        </div>
+
+        <div class="card-links">
+          <a href="https://github.com/Nour-salepan/scanning-project" target="_blank" rel="noopener">Repo ↗</a>
+          <a href="https://github.com/Nour-salepan/scanning-project/blob/main/recon.sh" target="_blank" rel="noopener">recon.sh ↗</a>
+          <a href="https://github.com/Nour-salepan/scanning-project/blob/main/recon-simple.sh" target="_blank" rel="noopener">recon-simple.sh ↗</a>
+        </div>
+      </div>
+
+      <!-- ===== Collapsed: earlier data analysis work ===== -->
+      <details class="archive">
+        <summary>
+          Earlier work — Data Analysis
+          <span class="archive-note">prior field · click to expand</span>
+        </summary>
+        <div class="archive-body">
+          <p style="font-size: 0.93rem; margin: 18px 0 24px;">
+            Before moving into security I worked as a data analyst. These projects aren't my
+            current focus, but the analytical habits they built — distrusting outliers,
+            cross-checking evidence, writing for non-technical readers — carry directly into
+            security work.
+          </p>
+
+          <div class="grid">
+            <div class="card">
+              <div class="card-header">
+                <h3>Marketing Campaign Audit</h3>
+                <span class="status">complete</span>
+              </div>
+              <p>
+                Audited a messy 798-row, 6-channel dataset in Excel. Flagged an 89.7x return
+                figure as a units error rather than a result — correcting blended ROAS from
+                6.4x to 3.7x, a 73% overstatement — and identified $345.5K of underperforming
+                budget.
+              </p>
+              <div class="tag-list">
+                <span class="tag-chip">Excel</span>
+                <span class="tag-chip">Anomaly Detection</span>
+                <span class="tag-chip">Data Auditing</span>
+              </div>
+              <div class="card-links">
+                <a href="https://github.com/Nour-salepan/data-analyst-portfolio" target="_blank" rel="noopener">Repo ↗</a>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>Car Price Analysis (SQL)</h3>
+                <span class="status">complete</span>
+              </div>
+              <p>
+                Schema design and 13 progressively advanced PostgreSQL queries — CTEs, window
+                functions, CASE-based banding — against a public vehicle-listings dataset,
+                after explicit null and duplicate validation.
+              </p>
+              <div class="tag-list">
+                <span class="tag-chip">PostgreSQL</span>
+                <span class="tag-chip">Window Functions</span>
+                <span class="tag-chip">CTEs</span>
+              </div>
+              <div class="card-links">
+                <a href="https://github.com/Nour-salepan/Car-Price-Analysis" target="_blank" rel="noopener">Repo ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <div style="margin-top: 28px;">
         <a href="https://github.com/Nour-salepan?tab=repositories" target="_blank" rel="noopener" class="btn btn-outline">All repositories on GitHub ↗</a>
       </div>
 

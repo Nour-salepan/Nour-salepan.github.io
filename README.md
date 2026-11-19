@@ -1,44 +1,51 @@
 # Nour Salepan — Portfolio
 
-Personal portfolio site for **Nour Salepan**, data analyst (SQL · Advanced Excel · Power BI · Python).
+Personal portfolio site for **Nour Salepan** — cybersecurity (Nmap · Wireshark · Linux · vulnerability assessment), with a background in data analysis.
 
-**Live site:** https://nour-salepan.github.io
+**Live site:** https://noursalepan.netlify.app · https://nour-salepan.github.io
 
 ## About
 
-A static, dependency-free portfolio built with plain HTML, CSS, and vanilla JavaScript — no build step, no framework, no npm install. Features a neon-accented design with light and dark themes, and a long-form writing section.
+A static, dependency-free portfolio built with plain HTML, CSS and vanilla JavaScript — no build step, no framework, no npm install. Neon-accented design with light and dark themes, and a long-form writing section.
 
 ## Pages
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Home — profile, key stats, featured work |
-| `projects.html` | Project case studies with methodology and findings |
-| `skills.html` | Tools and competencies with proficiency indicators |
-| `experience.html` | Work history, education, certifications, languages |
+| `index.html` | Home — positioning, key stats, featured security work, transferable skills |
+| `projects.html` | Security case studies (DVWA assessment, Nmap toolkit) + collapsed data-analysis archive |
+| `skills.html` | Security tools and concepts, transferable skills, collapsed data stack |
+| `experience.html` | Security projects, work history, education, certifications |
 | `blog.html` | Writing index |
-| `post-complete-guide.html` | Long-form guide: *From Clay Tablets to AI: The Complete Field Guide to Data Analysis* |
+| `post-cyber-foundations.html` | *Cybersecurity Foundations, Explained Simply* — Google Cybersecurity Certificate Course 1 concepts |
+| `post-complete-guide.html` | *From Clay Tablets to AI* — earlier long-form data analysis guide |
 | `contact.html` | Contact details |
 
 ## Assets
 
 | File | Purpose |
 | --- | --- |
-| `styles.css` | Core theme — CSS custom properties, light/dark tokens, layout, components |
+| `styles.css` | Core theme — CSS custom properties, light/dark tokens, layout, components, collapsible archives |
 | `article.css` | Long-form article typography, tables, callouts, timeline |
 | `theme.js` | Theme toggle with `localStorage` persistence, mobile nav, scroll animations |
 | `404.html` | Custom not-found page |
 
-## Featured projects
+## Featured security work
 
-- **[Marketing Campaign Performance Analysis](https://github.com/Nour-salepan/data-analyst-portfolio)** — Audited a 798-row, 6-channel ad dataset in Excel. Identified an 89.7x ROAS outlier as a source-data units error that had inflated blended return-on-spend by roughly 73% (6.4x → 3.7x corrected), and quantified $345.5K of underperforming budget.
-- **[Car Price Analysis](https://github.com/Nour-salepan/Car-Price-Analysis)** — Schema design and 13 progressively advanced PostgreSQL queries (CTEs, window functions, CASE banding) against a public vehicle-listings dataset.
+- **[Nmap Reconnaissance Toolkit + DVWA Security Assessment](https://github.com/Nour-salepan/scanning-project)** — Bash scripts automating the four-stage recon workflow (host discovery → port scan → version detection → NSE), plus a formal assessment of a local DVWA lab. Identified a critical credential-exposure chain: directory listing enabled on `/config/` combined with a leftover `config.inc.php.bak` served as plain text, exposing live database credentials. Documented with evidence, severity and remediation.
+
+All testing performed against systems I own or that explicitly authorise it (`scanme.nmap.org`, local labs, TryHackMe).
+
+## Earlier work — data analysis
+
+- **[Marketing Campaign Audit](https://github.com/Nour-salepan/data-analyst-portfolio)** — Audited a 798-row, 6-channel dataset. Identified an 89.7x ROAS outlier as a source-data units error that had inflated blended return-on-spend by ~73% (6.4x → 3.7x corrected).
+- **[Car Price Analysis](https://github.com/Nour-salepan/Car-Price-Analysis)** — Schema design and 13 progressively advanced PostgreSQL queries (CTEs, window functions, CASE banding).
 
 ## Running locally
 
 No tooling required — open `index.html` in a browser.
 
-For a local server (recommended, so relative paths behave exactly as they will in production):
+For a local server (so relative paths behave as in production):
 
 ```bash
 python3 -m http.server 8000
@@ -47,11 +54,7 @@ python3 -m http.server 8000
 
 ## Deployment
 
-Hosted on GitHub Pages from the `main` branch, root directory. Any push to `main` redeploys automatically.
-
-## Browser support
-
-Uses `color-mix()` and CSS custom properties — supported in all current major browsers. Degrades gracefully in older ones.
+Hosted on GitHub Pages (`main` branch, root) and Netlify, both building from this repository. Any push to `main` redeploys automatically.
 
 ## Contact
 
